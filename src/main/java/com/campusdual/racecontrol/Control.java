@@ -18,6 +18,8 @@ public class Control {
             System.out.println("*                                                        *");
             System.out.println("*         Insert '2' to enter the TOURNAMENT MENU        *");
             System.out.println("*                                                        *");
+            System.out.println("*         Insert '3' to enter the MANAGEMENT MENU        *");
+            System.out.println("*                                                        *");
             System.out.print("* >>> ");
             String answer = Input.string();
             switch (answer.trim()) {
@@ -39,48 +41,58 @@ public class Control {
                         System.out.println("*                                                        *");
                         System.out.println("*                 Insert '0' to GO BACK                  *");
                         System.out.println("*                                                        *");
-                        System.out.println("*            Insert '1' to enter the RACE MENU           *");
+                        System.out.println("*       Insert '1' to enter the STANDARD RACE MENU       *");
                         System.out.println("*                                                        *");
-                        System.out.println("*         Insert '2' to enter the TOURNAMENT MENU        *");
+                        System.out.println("*      Insert '2' to enter the ELIMINATION RACE MENU     *");
                         System.out.println("*                                                        *");
                         System.out.print("* >>> ");
                         String raceMenuAnswer = Input.string();
                         switch (raceMenuAnswer.trim()){
                             case "0":
-                                validRaceMenuAnswer = true;
-                                ui();
+                                //validRaceMenuAnswer = true;
+                                ui(); //todo probar a quitar ui() solo con el break debería retroceder
                                 break;
                             case "1":
-                                validRaceMenuAnswer = true;
+                                //validRaceMenuAnswer = true;
+                                boolean validStandardRaceMenuAnswer = false;
                                 do {
                                     System.out.println("*********************| RACE CONTROL |*********************");
-                                    System.out.println("*********************|  RACE  MENU  |*********************");
+                                    System.out.println("*****************|  STANDARD RACE  MENU  |****************");
                                     System.out.println("*                                                        *");
                                     System.out.println("*                 Insert '0' to GO BACK                  *");
                                     System.out.println("*                                                        *");
-                                    System.out.println("*            Insert '1' to enter the RACE MENU           *");
-                                    System.out.println("*                                                        *");
-                                    System.out.println("*         Insert '2' to enter the TOURNAMENT MENU        *");
+                                    System.out.println("*            Select the GARAGE from the list:            *");
                                     System.out.println("*                                                        *");
                                     System.out.print("* >>> ");
-                                    String raceMenuAnswer = Input.string();
-                                }while();
+                                    String standardRaceMenuAnswer = Input.string();
+                                    switch (standardRaceMenuAnswer.trim()){
+                                        case "0":
+                                            //validStandardRaceMenuAnswer = true;
+                                            ui(); //todo probar a quitar ui() solo con el break debería retroceder
+                                            break;
+                                    }
+                                }while(!validStandardRaceMenuAnswer);
                                 break;
                             case "2":
-                                validRaceMenuAnswer = true;
+                                //validRaceMenuAnswer = true;
+                                boolean validEliminationRaceMenuAnswer = false;
                                 do {
                                     System.out.println("*********************| RACE CONTROL |*********************");
-                                    System.out.println("*********************|  RACE  MENU  |*********************");
+                                    System.out.println("*****************| ELIMINATION RACE MENU |****************");
                                     System.out.println("*                                                        *");
                                     System.out.println("*                 Insert '0' to GO BACK                  *");
                                     System.out.println("*                                                        *");
-                                    System.out.println("*            Insert '1' to enter the RACE MENU           *");
-                                    System.out.println("*                                                        *");
-                                    System.out.println("*         Insert '2' to enter the TOURNAMENT MENU        *");
+                                    System.out.println("*            Select the GARAGE from the list:            *");
                                     System.out.println("*                                                        *");
                                     System.out.print("* >>> ");
-                                    String raceMenuAnswer = Input.string();
-                                }while();
+                                    String eliminationRaceMenuAnswer = Input.string();
+                                    switch (eliminationRaceMenuAnswer.trim()){
+                                        case "0":
+                                            //validEliminationRaceMenuAnswer = true;
+                                            ui(); //todo probar a quitar ui() solo con el break debería retroceder
+                                            break;
+                                    }
+                                }while(!validEliminationRaceMenuAnswer);
                                 break;
                             default:
                                 System.out.println("INVALID OPTION");
@@ -97,7 +109,7 @@ public class Control {
                     boolean validTournamentMenuAnswer = false;
                     do {
                         System.out.println("*********************| RACE CONTROL |*********************");
-                        System.out.println("*********************|  RACE  MENU  |*********************");
+                        System.out.println("********************|TOURNAMENT  MENU|********************");
                         System.out.println("*                                                        *");
                         System.out.println("*                 Insert '0' to GO BACK                  *");
                         System.out.println("*                                                        *");
@@ -106,7 +118,15 @@ public class Control {
                         System.out.println("*         Insert '2' to enter the TOURNAMENT MENU        *");
                         System.out.println("*                                                        *");
                         System.out.print("* >>> ");
-                        String raceMenuAnswer = Input.string();
+                        String tournamentMenuAnswer = Input.string();
+                        switch (tournamentMenuAnswer.trim()){
+                            case "0":
+                                ui();
+                                //validTournamentMenuAnswer = true;
+                                break;
+                            case "1":
+                                break;
+                        }
                     }while(!validTournamentMenuAnswer);
                     break;
                 case "3":
