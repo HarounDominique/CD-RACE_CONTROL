@@ -2,6 +2,7 @@ package com.campusdual.racecontrol;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        Control c = new Control();
+        c.ui();
     }
 }

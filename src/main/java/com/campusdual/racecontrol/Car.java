@@ -78,7 +78,7 @@ public class Car {
         }
     }
 
-
+/*
     public static void main(String[] args) {
        Car c = new Car("Renault", "Megane");
         System.out.println(c.exportCar());
@@ -90,8 +90,7 @@ public class Car {
         //Car.exportJSONToFile(jsonObject);
         //Car.importJSONToFile("test2.json");
 
-
-
-
     }
+
+ */
 }
