@@ -8,6 +8,8 @@ import java.io.FileWriter;
 
 public class Car {
 
+    //#region ATTRIBUTES
+
     public static final String BRAND = "Brand";
     public static final String MODEL = "Model";
     public static final String GARAGE = "Garage";
@@ -15,13 +17,17 @@ public class Car {
     private String brand;
     private String model;
     private Garage garage;
+    //#endregion
 
+    //#region CONTRUCTOR
     public Car(String brand, String model, Garage garage) {
         this.brand = brand;
         this.model = model;
         this.garage = garage;
     }
+    //#endregion
 
+    //#region METHODS
     public String getBrand() {
         return brand;
     }
@@ -77,6 +83,7 @@ public class Car {
             return null;
         }
     }
+    //#endregion
 
 /*
     public static void main(String[] args) {

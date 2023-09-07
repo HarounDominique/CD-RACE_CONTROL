@@ -70,6 +70,11 @@ public class Control {
                                             //validStandardRaceMenuAnswer = true;
                                             ui(); //todo probar a quitar ui() solo con el break debería retroceder
                                             break;
+                                        case "1":
+                                            break;
+                                        default:
+                                            System.out.println("INVALID COMMAND");
+                                            break;
                                     }
                                 }while(!validStandardRaceMenuAnswer);
                                 break;
@@ -91,11 +96,16 @@ public class Control {
                                             //validEliminationRaceMenuAnswer = true;
                                             ui(); //todo probar a quitar ui() solo con el break debería retroceder
                                             break;
+                                        case "1":
+                                            break;
+                                        default:
+                                            System.out.println("INVALID COMMAND");
+                                            break;
                                     }
                                 }while(!validEliminationRaceMenuAnswer);
                                 break;
                             default:
-                                System.out.println("INVALID OPTION");
+                                System.out.println("INVALID COMMAND");
                                 try {
                                     Thread.sleep(1000);
                                 } catch (InterruptedException e) {
@@ -126,10 +136,41 @@ public class Control {
                                 break;
                             case "1":
                                 break;
+                            default:
+                                System.out.println("INVALID COMMAND");
+                                break;
                         }
                     }while(!validTournamentMenuAnswer);
                     break;
                 case "3":
+                    boolean validManagementMenuAnswer = false;
+                    do {
+                        System.out.println("*********************| RACE CONTROL |*********************");
+                        System.out.println("********************|MANAGEMENT  MENU|********************");
+                        System.out.println("*                                                        *");
+                        System.out.println("*                 Insert '0' to GO BACK                  *");
+                        System.out.println("*                                                        *");
+                        System.out.println("*          Insert '1' to enter the GARAGES MENU          *");
+                        System.out.println("*                                                        *");
+                        System.out.println("*           Insert '2' to enter the CARS MENU            *");
+                        System.out.println("*                                                        *");
+                        System.out.print("* >>> ");
+                        String managementMenuAnswer = Input.string();
+                        switch (managementMenuAnswer.trim()){
+                            case "0":
+                                ui();
+                                //validTournamentMenuAnswer = true;
+                                break;
+                            case "1":
+                                break;
+                            case "2":
+                                break;
+                            default:
+                                System.out.println("INVALID COMMAND");
+                                break;
+                        }
+                    }while(!validManagementMenuAnswer);
+                    break;
                 default:
                     System.out.println("NON-EXISTENT COMMAND");
                     try {

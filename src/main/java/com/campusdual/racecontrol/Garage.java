@@ -4,16 +4,21 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Garage {
+    //#region ATTRIBUTES
     private String name;
     private ArrayList<Car> cars;
+    //#endregion
 
+    //#region CONTRUCTORS
     public Garage(String name, ArrayList<Car> cars) {
         this.name = name;
         this.cars = cars;
     }
     public Garage() {
     }
+    //#endregion
 
+    //#region METHODS
     public String getName() {
         return name;
     }
@@ -39,5 +44,6 @@ public class Garage {
         int index = random.nextInt(cars.size());
         return cars.get(index);
     }
+    //#endregion
 
 }
