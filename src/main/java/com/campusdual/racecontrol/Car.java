@@ -8,14 +8,18 @@ import java.io.FileWriter;
 
 public class Car {
 
-    public static final String BRAND = "brand";
-    public static final String MODEL = "model";
+    public static final String BRAND = "Brand";
+    public static final String MODEL = "Model";
+    public static final String GARAGE = "Garage";
+    private final int MAX_VELOCITY = 200;
     private String brand;
     private String model;
+    private Garage garage;
 
-    public Car(String brand, String model) {
+    public Car(String brand, String model, Garage garage) {
         this.brand = brand;
         this.model = model;
+        this.garage = garage;
     }
 
     public String getBrand() {
@@ -49,7 +53,8 @@ public class Car {
     public static Car importCar(JSONObject obj){
         String model = (String)obj.get(Car.MODEL);
         String brand = (String)obj.get(Car.BRAND);
-        return new Car(brand, model);
+        Garage garage = (Garage)obj.get(Car.GARAGE); //todo hacer que devuelva un string con el nombre del garaje en lugar de un obj garaje
+        return new Car(brand, model, garage);
     }
 
     public static void exportJSONToFile(JSONObject obj){
@@ -60,7 +65,7 @@ public class Car {
         }
     }
 
-    public static JSONObject importtJSONToFile(String fileName){
+    public static JSONObject importJSONToFile(String fileName){
         try(FileReader r = new FileReader(fileName)){
             JSONParser parser = new JSONParser();
             JSONObject obj = (JSONObject)parser.parse(r);
@@ -80,7 +85,7 @@ public class Car {
         c2.toString();
 
         //Car.exportJSONToFile(jsonObject);
-        //Car.importtJSONToFile("test2.json");
+        //Car.importJSONToFile("test2.json");
 
 
 
