@@ -53,9 +53,13 @@ public class Main {
         vw.setCars(vwCars);
         //endregion
 
-        //region UI
+
         Control c = new Control();
+
+        ArrayList<Garage> garages = new ArrayList<>(Arrays.asList(citroen, subaru, bmw, audi, mercedes, vw));
+        c.setGarages(garages);
+
         c.ui();
-        //endregion
+
     }
 }

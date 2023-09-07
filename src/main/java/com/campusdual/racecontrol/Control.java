@@ -2,9 +2,29 @@ package com.campusdual.racecontrol;
 
 import util.Input;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class Control {
+    //region ATTRIBUTES
+    private ArrayList<Garage> garages;
+    //endregion
+
+    //region CONSTRUCTORS
     public Control() {
     }
+    //endregion
+
+    //region METHODS
+
+    public ArrayList<Garage> getGarages() {
+        return garages;
+    }
+
+    public void setGarages(ArrayList<Garage> garages) {
+        this.garages = garages;
+    }
+
     public void ui(){
         boolean on = true;
         boolean control = false;
@@ -55,6 +75,7 @@ public class Control {
                             case "1":
                                 //validRaceMenuAnswer = true;
                                 boolean validStandardRaceMenuAnswer = false;
+                                int garageIndex = 0;
                                 do {
                                     System.out.println("*********************| RACE CONTROL |*********************");
                                     System.out.println("*****************|  STANDARD RACE  MENU  |****************");
@@ -63,17 +84,27 @@ public class Control {
                                     System.out.println("*                                                        *");
                                     System.out.println("*            Select the GARAGE from the list:            *");
                                     System.out.println("*                                                        *");
+                                    Iterator<Garage> iterator = this.garages.iterator();
+                                    while(iterator.hasNext()){
+                                        garageIndex++;
+                                        System.out.println(garageIndex+" "+iterator.next().getName());
+                                    }
+                                    //garageIndex=0;
                                     System.out.print("* >>> ");
                                     String standardRaceMenuAnswer = Input.string();
                                     switch (standardRaceMenuAnswer.trim()){
                                         case "0":
+                                            garageIndex = 0;
                                             //validStandardRaceMenuAnswer = true;
                                             ui(); //todo probar a quitar ui() solo con el break debería retroceder
                                             break;
-                                        case "1":
-                                            break;
                                         default:
-                                            System.out.println("INVALID COMMAND");
+                                            try{
+                                                System.out.println(this.garages.get(Integer.parseInt(standardRaceMenuAnswer)-1).getName());
+                                            }catch (NumberFormatException e){
+                                                System.out.println("INVALID COMMAND");
+                                                //e.printStackTrace();
+                                            }
                                             break;
                                     }
                                 }while(!validStandardRaceMenuAnswer);
@@ -185,4 +216,5 @@ public class Control {
             }
         } while (on);
     }
+    //endregion
 }
