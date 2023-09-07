@@ -6,9 +6,14 @@ import com.campusdual.racecontrol.Garage;
 import java.util.ArrayList;
 
 public class StandardRace extends Race {
+    //region ATTRIBUTES
+    public final String NAME = "Standard race";
+    //endregion
+
     //region CONSTRUCTOR
-    public StandardRace(String name, ArrayList<Garage> participatingGarages, ArrayList<Car> garagesCars) {
-        super(name, participatingGarages, garagesCars);
+    public StandardRace(ArrayList<Garage> participatingGarages, ArrayList<Car> garagesCars) {
+        super(participatingGarages, garagesCars);
+        super.setName(this.NAME);
     }
     //endregion
 

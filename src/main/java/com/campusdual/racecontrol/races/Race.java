@@ -15,8 +15,7 @@ public abstract class Race {
     //#endregion
 
     //#region CONSTRUCTORS
-    public Race(String name, ArrayList<Garage> participatingGarages, ArrayList<Car> garagesCars) {
-        this.name = name;
+    public Race(ArrayList<Garage> participatingGarages, ArrayList<Car> garagesCars) {
         this.participatingGarages = participatingGarages;
         this.garagesCars = garagesCars;
     }

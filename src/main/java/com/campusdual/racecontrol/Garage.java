@@ -10,9 +10,8 @@ public class Garage {
     //#endregion
 
     //#region CONTRUCTORS
-    public Garage(String name, ArrayList<Car> cars) {
+    public Garage(String name) {
         this.name = name;
-        this.cars = cars;
     }
     public Garage() {
     }
