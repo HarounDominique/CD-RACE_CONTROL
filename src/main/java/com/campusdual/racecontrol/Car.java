@@ -47,13 +47,16 @@ public class Car {
         JSONObject obj = new JSONObject();
         obj.put(Car.BRAND, this.getBrand());
         obj.put(Car.MODEL, this.getModel());
+        obj.put(Car.GARAGE, this.garage.getName());
         return obj;
     }
 
     public static Car importCar(JSONObject obj){
         String model = (String)obj.get(Car.MODEL);
         String brand = (String)obj.get(Car.BRAND);
-        Garage garage = (Garage)obj.get(Car.GARAGE); //todo hacer que devuelva un string con el nombre del garaje en lugar de un obj garaje
+        Garage garage = (Garage)obj.get(Car.GARAGE); //todo hacer que devuelva un string con el nombre del garaje en lugar de un obj garaje ->
+        // necesita devolver un objeto garaje para poner instanciar el objeto coche; porlo que deberemos incluir algún iterador que busque entre todos los garajes el que
+        //coincida con el nombre que recuperamos del archivo json
         return new Car(brand, model, garage);
     }
 
