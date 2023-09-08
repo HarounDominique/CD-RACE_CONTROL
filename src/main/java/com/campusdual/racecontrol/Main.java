@@ -1,7 +1,13 @@
 package com.campusdual.racecontrol;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Main {
     public static void main(String[] args) {
@@ -51,6 +57,42 @@ public class Main {
         Car v3 = new Car("Volkswagen", "Corrado", vw);
         ArrayList<Car> vwCars = new ArrayList<>(Arrays.asList(v1, v2, v3));
         vw.setCars(vwCars);
+
+        ArrayList<ArrayList<Car>> teams = new ArrayList<>(Arrays.asList(citroenCars, subaruCars, bmwCars, audiCars, mercedesCars, vwCars));
+
+        //endregion
+
+
+
+        //region EXPORT JSON
+        /*
+        JSONArray jsonArray = new JSONArray();
+
+        JSONObject carJson;
+        for (ArrayList<Car> a : teams){
+            for (Car c : a) {
+                carJson = c.exportCar();
+                jsonArray.add(carJson);
+            }
+        }
+
+        try {
+            FileWriter fileWriter = new FileWriter("allGarageCars.json");
+            fileWriter.write(jsonArray.toJSONString());
+            fileWriter.close();
+            System.out.println("Los coches se han guardado en el archivo JSON.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("ERROR: Los coches NO se han guardado en el archivo JSON.");
+        }
+
+         */
+        //endregion
+
+        //region IMPORT JSON
+
+
+
         //endregion
 
 
