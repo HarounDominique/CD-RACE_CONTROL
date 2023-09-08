@@ -1,12 +1,14 @@
 package com.campusdual.racecontrol;
 
+import org.campusdual.EXAMPLERacecontrol.Car2;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Garage {
     //#region ATTRIBUTES
     private String name;
-    private ArrayList<Car> cars;
+    private ArrayList<Car2> cars;
     //#endregion
 
     //#region CONTRUCTORS
@@ -26,15 +28,15 @@ public class Garage {
         this.name = name;
     }
 
-    public ArrayList<Car> getCars() {
+    public ArrayList<Car2> getCars() {
         return cars;
     }
 
-    public void setCars(ArrayList<Car> cars) {
+    public void setCars(ArrayList<Car2> cars) {
         this.cars = cars;
     }
 
-    public Car getRandomCar() {
+    public Car2 getRandomCar() {
         if (cars.isEmpty()) {
             throw new IllegalStateException("There are no cars in the garage");
         }

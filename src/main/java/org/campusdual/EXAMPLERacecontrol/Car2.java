@@ -1,8 +1,14 @@
 package org.campusdual.EXAMPLERacecontrol;
 
+import com.campusdual.racecontrol.Car;
+import com.campusdual.racecontrol.Garage;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import util.Input;
 import util.Utils;
 
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Random;
 
 public class Car2 implements Comparable<Car2>{
@@ -17,12 +23,13 @@ public class Car2 implements Comparable<Car2>{
     public Car2() {
         this.brand = Input.string("Marca del coche: ");
         this.model = Input.string("Modelo del coche: ");
-        //this.garageName = Input.string("Garaje del coche: ");
+        this.garageName = Input.string("Garaje del coche: ");
     }
 
-    public Car2(String brand, String model) {
+    public Car2(String brand, String model, String garageName) {
         this.brand = brand;
         this.model = model;
+        this.garageName = garageName;
     }
     //endregion
 
@@ -52,13 +59,15 @@ public class Car2 implements Comparable<Car2>{
     public void updateDistance(){
         this.distance += speedometer * 16.667;
     }
+
     @Override
     public String toString() {
         return "Car2{" +
                 "brand='" + brand + '\'' +
                 ", model='" + model + '\'' +
                 ", garageName='" + garageName + '\'' +
-                ", MAX_VELOCITY=" + MAX_VELOCITY +
+                ", speedometer=" + speedometer +
+                ", distance=" + distance +
                 '}';
     }
 
@@ -94,16 +103,51 @@ public class Car2 implements Comparable<Car2>{
         this.garageName = garageName;
     }
 
+    //import/export
+
+    public JSONObject exportCar(){
+        JSONObject obj = new JSONObject();
+        obj.put(Car.BRAND, this.getBrand());
+        obj.put(Car.MODEL, this.getModel());
+        obj.put(Car.GARAGE, this.getGarageName());
+        return obj;
+    }
+
+    public static Car2 importCar(JSONObject obj){
+        String model = (String)obj.get(Car.MODEL);
+        String brand = (String)obj.get(Car.BRAND);
+        String garage = (String)obj.get(Car.GARAGE);
+        return new Car2(brand, model, garage);
+    }
+
+    public static void exportJSONToFile(JSONObject obj){
+        try(FileWriter fw = new FileWriter("text.json")){
+            fw.write(obj.toJSONString());
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static JSONObject importJSONToFile(String fileName){
+        try(FileReader r = new FileReader(fileName)){
+            JSONParser parser = new JSONParser();
+            JSONObject obj = (JSONObject)parser.parse(r);
+            return obj;
+        }catch(Exception e){
+            return null;
+        }
+    }
+
     //endregion
 
     public static void main(String[] args) {
         //Car2 c = new Car2();
         //System.out.println(c);
 
-        Car2 c1 = new Car2("Seat", "Ibiza");
+        Car2 c1 = new Car2("Seat", "Ibiza", "SeatTeam");
         System.out.println(c1);
 
-        Car2 c2 = new Car2("Citroën", "Saxo");
+        Car2 c2 = new Car2("Citroën", "Saxo", "CitroënTeam");
 
         for(int i = 0; i<120; i++){
             c1.speedometerByCycle();
