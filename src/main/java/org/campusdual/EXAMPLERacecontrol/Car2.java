@@ -5,7 +5,7 @@ import util.Utils;
 
 import java.util.Random;
 
-public class Car2 {
+public class Car2 implements Comparable<Car2>{
     private String brand;
     private String model;
     private String garageName = "";
@@ -46,6 +46,11 @@ public class Car2 {
         }else{
             slowDown();
         }
+        updateDistance();
+    }
+
+    public void updateDistance(){
+        this.distance += speedometer * 16.667;
     }
     @Override
     public String toString() {
@@ -92,10 +97,31 @@ public class Car2 {
     //endregion
 
     public static void main(String[] args) {
-        Car2 c = new Car2();
-        System.out.println(c);
+        //Car2 c = new Car2();
+        //System.out.println(c);
 
-        Car2 c1 = new Car2("asdf", "asdf");
+        Car2 c1 = new Car2("Seat", "Ibiza");
         System.out.println(c1);
+
+        Car2 c2 = new Car2("Citroën", "Saxo");
+
+        for(int i = 0; i<120; i++){
+            c1.speedometerByCycle();
+            c2.speedometerByCycle();
+        }
+        System.out.println("Velocidad coche 1 final tras 12 minutos: "+c1.getSpeedometer()+", ditancia recorrida: "+c1.getDistance());
+        System.out.println("Velocidad coche 2 final tras 12 minutos: "+c2.getSpeedometer()+", ditancia recorrida: "+c2.getDistance());
+        System.out.println(c1.compareTo(c2));
+    }
+
+    @Override
+    public int compareTo(Car2 o) {
+        if(this.getDistance() > o.getDistance()){
+            return 1;
+        }else if(this.getDistance()<o.getDistance()){
+            return -1;
+        }else {
+            return 0;
+        }
     }
 }
