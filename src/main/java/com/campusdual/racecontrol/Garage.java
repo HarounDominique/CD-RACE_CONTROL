@@ -55,9 +55,10 @@ public class Garage {
      */
 
     public JSONObject exportGarage() {
-        JSONObject garageJson = new JSONObject();
-        garageJson.put(Garage.NAME, this.getName());
 
+        JSONObject garageJson = new JSONObject();
+
+        garageJson.put(Garage.NAME, this.getName());
         JSONArray carsArray = new JSONArray();
         for (Car car : this.getCars()) {
             JSONObject carJson = new JSONObject();

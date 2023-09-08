@@ -114,7 +114,6 @@ public class Main {
 
         //endregion
 
-
         Control c = new Control();
 
         c.setGarages(garages);
