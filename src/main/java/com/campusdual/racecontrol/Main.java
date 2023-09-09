@@ -16,22 +16,43 @@ public class Main {
 
         JSONParser parser = new JSONParser();
 
-        JSONObject jsonObject = null;
+        JSONObject carJsonObject = null;
 
         try {
             Object obj = parser.parse(new FileReader("allCars.json"));
 
-            jsonObject = (JSONObject) obj;
+            carJsonObject = (JSONObject) obj;
 
-            System.out.println(jsonObject);
+            System.out.println(carJsonObject);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        ArrayList<Car> arrayCar = c.importCarsFromJSON(jsonObject);
+        ArrayList<Car> arrayCar = c.importCarsFromJSON(carJsonObject);
         for(Car car : arrayCar){
             car.toString();
+        }
+
+        Garage g = new Garage();
+
+        JSONObject garageJsonObject = null;
+
+        try {
+            Object obj = parser.parse(new FileReader("allGarages.json"));
+
+            garageJsonObject = (JSONObject) obj;
+
+            System.out.println(garageJsonObject);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<Garage> arrayGarage = g.importGaragesFromJSON(garageJsonObject);
+        
+        for(Garage garage : arrayGarage){
+            garage.toString();
         }
 
 

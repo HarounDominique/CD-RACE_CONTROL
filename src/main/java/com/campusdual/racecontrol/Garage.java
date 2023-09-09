@@ -88,31 +88,34 @@ public class Garage {
 
  */
 
-    public static ArrayList<Car> importGaragesFromJSON(JSONObject jsonObj) {
-
-        ArrayList<Car> cars = new ArrayList<>();
+    public static ArrayList<Garage> importGaragesFromJSON(JSONObject jsonObj) {
+        ArrayList<Garage> garages = new ArrayList<>();
 
         try {
-            JSONArray jsonArray = (JSONArray) jsonObj.get("%Team");
+            for (Object teamKey : jsonObj.keySet()) {
+                JSONObject teamJson = (JSONObject) jsonObj.get(teamKey);
+                String garageName = teamKey.toString();
 
-            for (Object obj : jsonArray) {
-                for(Car car : obj){
+                JSONArray garageCars = (JSONArray) teamJson.get("Garage Cars");
+                ArrayList<Car> cars = new ArrayList<>();
 
-                    JSONObject garageJson = (JSONObject) obj;
-                    String brand = (String) garageJson.get("Brand");
-                    String garage = (String) garageJson.get("Garage");
-                    String model = (String) garageJson.get("Model");
+                for (Object carObj : garageCars) {
+                    JSONObject carJson = (JSONObject) carObj;
+                    String brand = (String) carJson.get("Brand");
+                    String model = (String) carJson.get("Model");
 
-                    Car c = new Car(brand, model, garage);
-                    cars.add(c);
+                    Car car = new Car(brand, model, garageName);
+                    cars.add(car);
                 }
-            }
 
+                Garage garage = new Garage(garageName, cars);
+                garages.add(garage);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return cars;
+        return garages;
     }
 
     public static void exportJSONToFile(ArrayList<Garage> garagesArrayList) {
