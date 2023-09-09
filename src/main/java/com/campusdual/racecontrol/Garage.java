@@ -85,7 +85,8 @@ public class Garage {
 
         for (Garage g : garagesArrayList) {
             JSONObject garageJson = new JSONObject();
-            garageJson.put(Garage.NAME, g.getName());
+            jsonGarages.put(g.getName(), garageJson);
+            //garageJson.put(Garage.NAME, g.getName());
 
             JSONArray carsArray = new JSONArray();
             for (Car c : g.getCars()) {
@@ -94,9 +95,8 @@ public class Garage {
                 carJson.put("Model", c.getModel());
                 carsArray.add(carJson);
             }
+            garageJson.put("Garage Cars", carsArray);
 
-            //garageJson.put("Garage Cars", carsArray);
-            jsonGarages.put(g.getName(), garageJson);
         }
 
         try {

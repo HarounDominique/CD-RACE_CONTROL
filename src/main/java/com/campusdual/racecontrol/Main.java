@@ -76,7 +76,7 @@ public class Main {
 
         /**EXPORTAR COCHES**/
 
-        Car c = new Car();
+        Car c = new Car("","","");
         c.exportJSONToFile(carsArrayList);
 
         /**EXPORTAR GARAGES**/
