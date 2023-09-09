@@ -6,6 +6,7 @@ import org.json.simple.parser.JSONParser;
 
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -14,8 +15,8 @@ public class Garage {
     private String name;
     private ArrayList<Car> cars;
 
-    public static final String NAME = "Name";
-    public static final String CARS = "Cars";
+    public static final String NAME = "Garage Name";
+    public static final String CARS = "Garage Cars";
     //#endregion
 
     //#region CONTRUCTORS
@@ -60,13 +61,14 @@ public class Garage {
 
         garageJson.put(Garage.NAME, this.getName());
         JSONArray carsArray = new JSONArray();
+        garageJson.put(Garage.CARS, carsArray);
         for (Car car : this.getCars()) {
             JSONObject carJson = new JSONObject();
-            carJson.put("brand", car.getBrand());
-            carJson.put("model", car.getModel());
+            carJson.put(car.BRAND, car.getBrand());
+            carJson.put(car.MODEL, car.getModel());
             carsArray.add(carJson);
         }
-        garageJson.put(Garage.CARS, carsArray);
+
 
         return garageJson;
     }
@@ -78,11 +80,33 @@ public class Garage {
         return new Car(brand, model, garage);
     }
 
-    public static void exportJSONToFile(JSONObject obj){
-        try(FileWriter fw = new FileWriter("text.json")){
-            fw.write(obj.toJSONString());
-        }catch(Exception e){
+    public static void exportJSONToFile(ArrayList<Garage> garagesArrayList) {
+        JSONObject jsonGarages = new JSONObject();
+
+        for (Garage g : garagesArrayList) {
+            JSONObject garageJson = new JSONObject();
+            garageJson.put(Garage.NAME, g.getName());
+
+            JSONArray carsArray = new JSONArray();
+            for (Car c : g.getCars()) {
+                JSONObject carJson = new JSONObject();
+                carJson.put("Brand", c.getBrand());
+                carJson.put("Model", c.getModel());
+                carsArray.add(carJson);
+            }
+
+            //garageJson.put("Garage Cars", carsArray);
+            jsonGarages.put(g.getName(), garageJson);
+        }
+
+        try {
+            FileWriter fileWriter = new FileWriter("allGarages.json");
+            fileWriter.write(jsonGarages.toJSONString());
+            fileWriter.close();
+            System.out.println("Los GARAJES se han guardado en el archivo JSON.");
+        } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("ERROR: Los GARAJES NO se han guardado en el archivo JSON.");
         }
     }
 

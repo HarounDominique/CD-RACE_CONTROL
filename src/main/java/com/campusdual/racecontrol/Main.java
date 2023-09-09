@@ -25,7 +25,7 @@ public class Main {
         Garage mercedes = new Garage("MercedesBenzTeam");
         Garage vw = new Garage("VolkswagenTeam");
 
-        ArrayList<Garage> garages = new ArrayList<>(Arrays.asList(citroen, subaru, bmw, audi, mercedes, vw));
+        ArrayList<Garage> garagesArrayList = new ArrayList<>(Arrays.asList(citroen, subaru, bmw, audi, mercedes, vw));
         //endregion
 
         //region CARS
@@ -65,60 +65,32 @@ public class Main {
         ArrayList<Car> vwCars = new ArrayList<>(Arrays.asList(v1, v2, v3));
         vw.setCars(vwCars);
 
-        ArrayList<ArrayList<Car>> teams = new ArrayList<>(Arrays.asList(citroenCars, subaruCars, bmwCars, audiCars, mercedesCars, vwCars));
+        ArrayList<ArrayList<Car>> carsArrayList = new ArrayList<>(Arrays.asList(citroenCars, subaruCars, bmwCars, audiCars, mercedesCars, vwCars));
 
         //endregion
 
 
         //region EXPORT JSON
 
-        JSONArray jsonArray = new JSONArray();
+
 
         /**EXPORTAR COCHES**/
 
-        JSONObject carJson;
-        for (ArrayList<Car> a : teams) {
-            for (Car c : a) {
-                carJson = c.exportCar();
-                jsonArray.add(carJson);
-            }
-        }
-
-        try {
-            FileWriter fileWriter = new FileWriter("allCars.json");
-            fileWriter.write(jsonArray.toJSONString());
-            fileWriter.close();
-            System.out.println("Los COCHES se han guardado en el archivo JSON.");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("ERROR: Los COCHES NO se han guardado en el archivo JSON.");
-        }
+        Car c = new Car();
+        c.exportJSONToFile(carsArrayList);
 
         /**EXPORTAR GARAGES**/
 
-        JSONObject garageJson;
-        for (Garage g : garages) {
-            garageJson = g.exportGarage();
-            jsonArray.add(garageJson);
-        }
-
-        try {
-            FileWriter fileWriter = new FileWriter("allGarages.json");
-            fileWriter.write(jsonArray.toJSONString());
-            fileWriter.close();
-            System.out.println("Los GARAJES se han guardado en el archivo JSON.");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("ERROR: Los GARAJES NO se han guardado en el archivo JSON.");
-        }
+        Garage g = new Garage();
+        g.exportJSONToFile(garagesArrayList);
 
         //endregion
 
-        Control c = new Control();
+        Control control = new Control();
 
-        c.setGarages(garages);
+        control.setGarages(garagesArrayList);
 
-        c.ui();
+        control.ui();
 
     }
 }

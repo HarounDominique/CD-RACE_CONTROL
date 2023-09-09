@@ -1,5 +1,6 @@
 package com.campusdual.racecontrol;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import util.Input;
@@ -7,6 +8,8 @@ import util.Utils;
 
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class Car implements Comparable<Car>{
     //region ATTRIBUTES
@@ -124,11 +127,25 @@ public class Car implements Comparable<Car>{
         return new Car(brand, model, garage);
     }
 
-    public static void exportJSONToFile(JSONObject obj){
-        try(FileWriter fw = new FileWriter("text.json")){
-            fw.write(obj.toJSONString());
-        }catch(Exception e){
+    public static void exportJSONToFile(ArrayList<ArrayList<Car>> carsArrayList){
+        JSONArray jsonCarArray = new JSONArray();
+
+        JSONObject carJson;
+        for (ArrayList<Car> a : carsArrayList) {
+            for (Car c : a) {
+                carJson = c.exportCar();
+                jsonCarArray.add(carJson);
+            }
+        }
+
+        try {
+            FileWriter fileWriter = new FileWriter("allCars.json");
+            fileWriter.write(jsonCarArray.toJSONString());
+            fileWriter.close();
+            System.out.println("Los COCHES se han guardado en el archivo JSON.");
+        } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("ERROR: Los COCHES NO se han guardado en el archivo JSON.");
         }
     }
 
