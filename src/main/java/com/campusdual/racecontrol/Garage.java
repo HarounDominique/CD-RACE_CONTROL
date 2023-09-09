@@ -20,6 +20,12 @@ public class Garage {
     //#endregion
 
     //#region CONTRUCTORS
+
+    public Garage(String name, ArrayList<Car> cars) {
+        this.name = name;
+        this.cars = cars;
+    }
+
     public Garage(String name) {
         this.name = name;
     }
@@ -79,25 +85,27 @@ public class Garage {
         String garage = (String)obj.get(Car.GARAGE);
         return new Car(brand, model, garage);
     }
-    
+
  */
 
     public static ArrayList<Car> importGaragesFromJSON(JSONObject jsonObj) {
 
-
         ArrayList<Car> cars = new ArrayList<>();
 
         try {
-            JSONArray jsonArray = (JSONArray) jsonObj.get("Cars");
+            JSONArray jsonArray = (JSONArray) jsonObj.get("%Team");
 
             for (Object obj : jsonArray) {
-                JSONObject carJson = (JSONObject) obj;
-                String brand = (String) carJson.get("Brand");
-                String model = (String) carJson.get("Model");
-                String garageName = (String) carJson.get("Garage");
+                for(Car car : obj){
 
-                Car car = new Car(brand, model, garageName);
-                cars.add(car);
+                    JSONObject garageJson = (JSONObject) obj;
+                    String brand = (String) garageJson.get("Brand");
+                    String garage = (String) garageJson.get("Garage");
+                    String model = (String) garageJson.get("Model");
+
+                    Car c = new Car(brand, model, garage);
+                    cars.add(c);
+                }
             }
 
         } catch (Exception e) {
@@ -120,10 +128,10 @@ public class Garage {
                 JSONObject carJson = new JSONObject();
                 carJson.put("Brand", c.getBrand());
                 carJson.put("Model", c.getModel());
+                carJson.put("Garage", c.getGarageName());
                 carsArray.add(carJson);
             }
             garageJson.put("Garage Cars", carsArray);
-
         }
 
         try {

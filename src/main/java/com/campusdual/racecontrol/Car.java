@@ -147,33 +147,26 @@ public class Car implements Comparable<Car>{
     }
 
     public static void exportJSONToFile(ArrayList<ArrayList<Car>> carsArrayList) {
-        try {
-            // Crear un objeto JSON principal
-            JSONObject mainObject = new JSONObject();
 
-            // Crear un arreglo JSON para almacenar los coches
+            JSONObject jsonCars = new JSONObject();
+
             JSONArray carsArray = new JSONArray();
 
-            // Iterar a través de los garajes
             for (ArrayList<Car> garageCars : carsArrayList) {
                 for (Car car : garageCars) {
-                    // Crear un objeto JSON para cada coche
                     JSONObject carJson = new JSONObject();
                     carJson.put("Brand", car.getBrand());
                     carJson.put("Model", car.getModel());
                     carJson.put("Garage", car.getGarageName());
 
-                    // Agregar el objeto coche al arreglo de coches
                     carsArray.add(carJson);
                 }
             }
 
-            // Agregar el arreglo de coches al objeto principal con la clave "Cars"
-            mainObject.put("Cars", carsArray);
-
-            // Escribir el objeto JSON en un archivo
+            jsonCars.put("Cars", carsArray);
+        try {
             FileWriter fileWriter = new FileWriter("allCars.json");
-            fileWriter.write(mainObject.toJSONString());
+            fileWriter.write(jsonCars.toJSONString());
             fileWriter.close();
 
             System.out.println("Los COCHES se han guardado en el archivo JSON.");
