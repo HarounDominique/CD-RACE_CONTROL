@@ -1,12 +1,9 @@
 package com.campusdual.racecontrol;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -15,8 +12,6 @@ public class Main {
 
         //region IMPORT JSON
 
-        //TODO: IMPORTAR OBJETOS EN LUGAR DE INSTANCIARLOS
-
         Car c = new Car("","","");
 
         JSONParser parser = new JSONParser();
@@ -24,20 +19,17 @@ public class Main {
         JSONObject jsonObject = null;
 
         try {
-            // Lee el archivo JSON desde la raíz del proyecto
             Object obj = parser.parse(new FileReader("allCars.json"));
 
-            // Convierte el objeto leído en un JSONObject
             jsonObject = (JSONObject) obj;
 
-            // Ahora puedes trabajar con el objeto JSONObject como desees
             System.out.println(jsonObject);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        ArrayList<Car> arrayCar = c.parseJSONToCars(jsonObject);
+        ArrayList<Car> arrayCar = c.importCarsFromJSON(jsonObject);
         for(Car car : arrayCar){
             car.toString();
         }
@@ -104,7 +96,7 @@ public class Main {
         //region EXPORT JSON
 
         /**EXPORTAR COCHES**/
-/*
+/*      todo: poner este método en la opción de salir de la UI
         Car c = new Car("","","");
         c.exportJSONToFile(carsArrayList);
 

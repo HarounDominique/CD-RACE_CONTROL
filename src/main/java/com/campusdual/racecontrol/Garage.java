@@ -72,12 +72,39 @@ public class Garage {
 
         return garageJson;
     }
-
+/*
     public static Car importCar(JSONObject obj){
         String model = (String)obj.get(Car.MODEL);
         String brand = (String)obj.get(Car.BRAND);
         String garage = (String)obj.get(Car.GARAGE);
         return new Car(brand, model, garage);
+    }
+    
+ */
+
+    public static ArrayList<Car> importGaragesFromJSON(JSONObject jsonObj) {
+
+
+        ArrayList<Car> cars = new ArrayList<>();
+
+        try {
+            JSONArray jsonArray = (JSONArray) jsonObj.get("Cars");
+
+            for (Object obj : jsonArray) {
+                JSONObject carJson = (JSONObject) obj;
+                String brand = (String) carJson.get("Brand");
+                String model = (String) carJson.get("Model");
+                String garageName = (String) carJson.get("Garage");
+
+                Car car = new Car(brand, model, garageName);
+                cars.add(car);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return cars;
     }
 
     public static void exportJSONToFile(ArrayList<Garage> garagesArrayList) {

@@ -3,7 +3,6 @@ package com.campusdual.racecontrol;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import util.Input;
 import util.Utils;
 
@@ -121,19 +120,14 @@ public class Car implements Comparable<Car>{
         return obj;
     }
 
-    public static Car importCar(JSONObject obj){
 
-        String model = (String)obj.get(Car.MODEL);
-        String brand = (String)obj.get(Car.BRAND);
-        String garage = (String)obj.get(Car.GARAGE);
-        return new Car(brand, model, garage);
-    }
+    public static ArrayList<Car> importCarsFromJSON(JSONObject jsonObj) {
 
-    public static ArrayList<Car> parseJSONToCars(JSONObject jsonObject) {
+
         ArrayList<Car> cars = new ArrayList<>();
 
         try {
-            JSONArray jsonArray = (JSONArray) jsonObject.get("Cars");
+            JSONArray jsonArray = (JSONArray) jsonObj.get("Cars");
 
             for (Object obj : jsonArray) {
                 JSONObject carJson = (JSONObject) obj;
