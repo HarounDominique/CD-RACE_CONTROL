@@ -3,6 +3,7 @@ package com.campusdual.racecontrol;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import util.Input;
 import util.Utils;
 
@@ -121,27 +122,66 @@ public class Car implements Comparable<Car>{
     }
 
     public static Car importCar(JSONObject obj){
+
         String model = (String)obj.get(Car.MODEL);
         String brand = (String)obj.get(Car.BRAND);
         String garage = (String)obj.get(Car.GARAGE);
         return new Car(brand, model, garage);
     }
 
-    public static void exportJSONToFile(ArrayList<ArrayList<Car>> carsArrayList){
-        JSONArray jsonCarArray = new JSONArray();
-
-        JSONObject carJson;
-        for (ArrayList<Car> a : carsArrayList) {
-            for (Car c : a) {
-                carJson = c.exportCar();
-                jsonCarArray.add(carJson);
-            }
-        }
+    public static ArrayList<Car> parseJSONToCars(JSONObject jsonObject) {
+        ArrayList<Car> cars = new ArrayList<>();
 
         try {
+            JSONArray jsonArray = (JSONArray) jsonObject.get("Cars");
+
+            for (Object obj : jsonArray) {
+                JSONObject carJson = (JSONObject) obj;
+                String brand = (String) carJson.get("Brand");
+                String model = (String) carJson.get("Model");
+                String garageName = (String) carJson.get("Garage");
+
+                Car car = new Car(brand, model, garageName);
+                cars.add(car);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return cars;
+    }
+
+    public static void exportJSONToFile(ArrayList<ArrayList<Car>> carsArrayList) {
+        try {
+            // Crear un objeto JSON principal
+            JSONObject mainObject = new JSONObject();
+
+            // Crear un arreglo JSON para almacenar los coches
+            JSONArray carsArray = new JSONArray();
+
+            // Iterar a través de los garajes
+            for (ArrayList<Car> garageCars : carsArrayList) {
+                for (Car car : garageCars) {
+                    // Crear un objeto JSON para cada coche
+                    JSONObject carJson = new JSONObject();
+                    carJson.put("Brand", car.getBrand());
+                    carJson.put("Model", car.getModel());
+                    carJson.put("Garage", car.getGarageName());
+
+                    // Agregar el objeto coche al arreglo de coches
+                    carsArray.add(carJson);
+                }
+            }
+
+            // Agregar el arreglo de coches al objeto principal con la clave "Cars"
+            mainObject.put("Cars", carsArray);
+
+            // Escribir el objeto JSON en un archivo
             FileWriter fileWriter = new FileWriter("allCars.json");
-            fileWriter.write(jsonCarArray.toJSONString());
+            fileWriter.write(mainObject.toJSONString());
             fileWriter.close();
+
             System.out.println("Los COCHES se han guardado en el archivo JSON.");
         } catch (IOException e) {
             e.printStackTrace();
