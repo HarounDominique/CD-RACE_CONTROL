@@ -9,7 +9,7 @@ public class EliminationRace extends Race {
     //region ATTRIBUTES
     public final String NAME = "Elimination race";
     public final int DURATION = 180;
-    public final RaceType RACE_TYPE = RaceType.ELIMINATION;
+    public final RaceType RACE_TYPE = RaceType.ELIMINAT;
     //endregion
 
     //region CONSTRUCTORS

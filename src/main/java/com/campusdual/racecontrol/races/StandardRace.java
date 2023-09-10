@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class StandardRace extends Race {
     //region ATTRIBUTES
-    public final String NAME = "Standard race";
+    public final String NAME = "Standard    race";
     public final int DURATION = 180;
     public final RaceType RACE_TYPE = RaceType.STANDARD;
     //endregion
