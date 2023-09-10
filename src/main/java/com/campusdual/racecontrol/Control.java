@@ -178,6 +178,9 @@ public class Control {
                                                 pause(500);
                                                 boolean validGarageSelection = false;
                                                 int garageIndex = 0;
+
+                                                Garage firstGarage;
+                                                Garage secondGarage;
                                                 do{
                                                     System.out.println("*********************| RACE CONTROL |*********************");
                                                     System.out.println("*********************|  RACE  MENU  |*********************");
@@ -208,8 +211,41 @@ public class Control {
                                                             try {
                                                                 int selectedGarageInteger = Integer.parseInt(garageSelectionAnswer.trim());
                                                                 System.out.println("You selected " + allGaragesArray.get(selectedGarageInteger - 1).getName());
+                                                                firstGarage = allGaragesArray.get(selectedGarageInteger - 1);
                                                                 garageIndex = 0;
                                                                 pause(500);
+
+                                                                boolean validSecondGarageSelection = false;
+                                                                do {
+                                                                    System.out.println("*********************| RACE CONTROL |*********************");
+                                                                    System.out.println("*********************|  RACE  MENU  |*********************");
+                                                                    System.out.println("********************|GARAGE SELECTION|*********************");
+                                                                    System.out.println("*                                                        *");
+                                                                    System.out.println("*                 Insert '0' to GO BACK                  *");
+                                                                    System.out.println("*                                                        *");
+                                                                    System.out.println("*                           OR                           *");
+                                                                    System.out.println("*                                                        *");
+                                                                    System.out.println("*             Select a GARAGE to PARTICIPATE:            *");
+                                                                    System.out.println("*                                                        *");
+                                                                    System.out.println("* INDEX| GARAGE NAME                                   *");
+                                                                    Iterator<Garage> secondGarageIterator = this.allGaragesArray.iterator();
+                                                                    while (secondGarageIterator.hasNext()) {
+                                                                        garageIndex++;
+                                                                        System.out.println("     " + garageIndex + " | " + secondGarageIterator.next().getName());
+                                                                    }
+                                                                    System.out.print("* >>> ");
+                                                                    String garageSecondSelectionAnswer = Input.string();
+                                                                    switch (garageSecondSelectionAnswer.trim()){
+                                                                        case "0":
+                                                                            garageIndex = 0;
+                                                                            validSecondGarageSelection = true;
+                                                                            ui();
+                                                                            break;
+
+                                                                        default:
+                                                                            break;
+                                                                    }
+                                                                }while(!validSecondGarageSelection);
                                                             } catch (NumberFormatException nfe) {
                                                                 System.out.println("ERROR: INVALID NUMBER FORMAT");
                                                                 pause(1000);
