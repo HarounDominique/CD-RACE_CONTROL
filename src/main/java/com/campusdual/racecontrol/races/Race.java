@@ -10,14 +10,29 @@ public abstract class Race {
     //#region ATTRIBUTES
     private String name;
     private ArrayList<Garage> participatingGarages;
-    private ArrayList<Car> garagesCars;
+    private ArrayList<Car> participatingCars;
     private ArrayList<Car> podium;
+    private int durationInMinutes;
     //#endregion
 
     //#region CONSTRUCTORS
-    public Race(ArrayList<Garage> participatingGarages, ArrayList<Car> garagesCars) {
+
+    public Race(String name, int durationInMinutes, ArrayList<Garage> participatingGarages, ArrayList<Car> participatingCars) {
+        this.name = name;
+        this.durationInMinutes = durationInMinutes;
         this.participatingGarages = participatingGarages;
-        this.garagesCars = garagesCars;
+        this.participatingCars = participatingCars;
+    }
+
+    public Race(String name, ArrayList<Garage> participatingGarages, ArrayList<Car> participatingCars) {
+        this.name = name;
+        this.participatingGarages = participatingGarages;
+        this.participatingCars = participatingCars;
+    }
+
+    public Race(ArrayList<Garage> participatingGarages, ArrayList<Car> participatingCars) {
+        this.participatingGarages = participatingGarages;
+        this.participatingCars = participatingCars;
     }
 
     public Race() {
@@ -25,6 +40,15 @@ public abstract class Race {
     //#endregion
 
     //#region METHODS
+
+    public int getDurationInMinutes() {
+        return durationInMinutes;
+    }
+
+    public void setDurationInMinutes(int durationInMinutes) {
+        this.durationInMinutes = durationInMinutes;
+    }
+
     public String getName() {
         return name;
     }
@@ -41,12 +65,12 @@ public abstract class Race {
         this.participatingGarages = participatingGarages;
     }
 
-    public ArrayList<Car> getGaragesCars() {
-        return garagesCars;
+    public ArrayList<Car> getParticipatingCars() {
+        return participatingCars;
     }
 
-    public void setGaragesCars(ArrayList<Car> garagesCars) {
-        this.garagesCars = garagesCars;
+    public void setParticipatingCars(ArrayList<Car> participatingCars) {
+        this.participatingCars = participatingCars;
     }
 
     public ArrayList<Car> getPodium() {

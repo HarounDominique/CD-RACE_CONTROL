@@ -22,6 +22,14 @@ public class Control {
 
     //region METHODS
 
+    public void pause(int miliseconds){
+        try {
+            Thread.sleep(miliseconds);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public ArrayList<Garage> getGaragesArray() {
         return garagesArray;
     }
@@ -65,11 +73,7 @@ public class Control {
                     g.exportJSONToFile(garagesArray);
                     on = false;
                     System.out.println("EXITING");
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
+                    pause(1000);
                     System.exit(0);
                     break;
 
@@ -129,8 +133,10 @@ public class Control {
                                                 garageIndex = 0;
                                             } catch (NumberFormatException nfe) {
                                                 System.out.println("ERROR: INVALID NUMBER FORMAT");
+                                                pause(1000);
                                             } catch (IndexOutOfBoundsException ioobe) {
                                                 System.out.println("INVALID OPTION");
+                                                pause(1000);
                                             }
                                             break;
                                     }
@@ -161,6 +167,7 @@ public class Control {
 
                                         default:
                                             System.out.println("INVALID COMMAND");
+                                            pause(1000);
                                             break;
 
                                     }
@@ -190,6 +197,7 @@ public class Control {
 
                                         default:
                                             System.out.println("INVALID COMMAND");
+                                            pause(1000);
                                             break;
 
                                     }
@@ -198,11 +206,7 @@ public class Control {
 
                             default:
                                 System.out.println("INVALID COMMAND");
-                                try {
-                                    Thread.sleep(1000);
-                                } catch (InterruptedException e) {
-                                    throw new RuntimeException(e);
-                                }
+                                pause(1000);
                                 break;
                         }
                     }while(!validRaceMenuAnswer);
@@ -232,6 +236,7 @@ public class Control {
 
                             default:
                                 System.out.println("INVALID COMMAND");
+                                pause(1000);
                                 break;
 
                         }
@@ -239,11 +244,7 @@ public class Control {
                     break;
                 default:
                     System.out.println("INVALID COMMAND");
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
+                    pause(1000);
                     break;
 
             }
