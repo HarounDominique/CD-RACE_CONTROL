@@ -2,7 +2,11 @@ package com.campusdual.racecontrol.races;
 
 import com.campusdual.racecontrol.Car;
 import com.campusdual.racecontrol.Garage;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public abstract class Race {
@@ -48,6 +52,46 @@ public abstract class Race {
     //#endregion
 
     //#region METHODS
+
+    public static void exportJSONToFile(ArrayList<Race> racesList) {
+        JSONObject jsonRaces = new JSONObject();
+        JSONArray racesArray = new JSONArray();
+
+        for (Race race : racesList) {
+            JSONObject raceJson = new JSONObject();
+            raceJson.put("Name", race.getName());
+            raceJson.put("RaceType", race.getRaceType().name());
+            raceJson.put("DurationInMinutes", race.getDurationInMinutes());
+
+            // Verifica si los campos adicionales están definidos
+            if (race.getParticipatingGarages() != null) {
+                raceJson.put("ParticipatingGarages", race.getParticipatingGarages());
+            } else {
+                raceJson.put("ParticipatingGarages", "null");
+            }
+
+            if (race.getParticipatingCars() != null) {
+                raceJson.put("ParticipatingCars", race.getParticipatingCars());
+            } else {
+                raceJson.put("ParticipatingCars", "null");
+            }
+
+            racesArray.add(raceJson);
+        }
+
+        jsonRaces.put("Races", racesArray);
+
+        try {
+            FileWriter fileWriter = new FileWriter("allRaces.json");
+            fileWriter.write(jsonRaces.toJSONString());
+            fileWriter.close();
+
+            System.out.println("Las carreras se han guardado en el archivo JSON.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("ERROR: Las carreras NO se han guardado en el archivo JSON.");
+        }
+    }
 
 
     public RaceType getRaceType() {

@@ -13,6 +13,12 @@ public class EliminationRace extends Race {
     //endregion
 
     //region CONSTRUCTORS
+
+    public EliminationRace() {
+        super.setName(this.NAME);
+        super.setDurationInMinutes(this.DURATION);
+        super.setRaceType(this.RACE_TYPE);
+    }
     public EliminationRace(String name, RaceType raceType, int durationInMinutes, ArrayList<Garage> participatingGarages, ArrayList<Car> participatingCars) {
         super(name, raceType, durationInMinutes, participatingGarages, participatingCars);
     }
@@ -29,8 +35,6 @@ public class EliminationRace extends Race {
         super(name, raceType, duration);
     }
 
-    public EliminationRace() {
-    }
     //endregion
 
     //region METHODS
