@@ -121,16 +121,18 @@ public class Car implements Comparable<Car>{
     }
 
 
-    public static ArrayList<Car> importCarsFromJSON(JSONObject jsonObj) {
-
-
+    public static ArrayList<Car> importCarsFromJSON(String filePath) {
         ArrayList<Car> cars = new ArrayList<>();
 
         try {
+            JSONParser parser = new JSONParser();
+            Object obj = parser.parse(new FileReader(filePath));
+
+            JSONObject jsonObj = (JSONObject) obj;
             JSONArray jsonArray = (JSONArray) jsonObj.get("Cars");
 
-            for (Object obj : jsonArray) {
-                JSONObject carJson = (JSONObject) obj;
+            for (Object carObj : jsonArray) {
+                JSONObject carJson = (JSONObject) carObj;
                 String brand = (String) carJson.get("Brand");
                 String model = (String) carJson.get("Model");
                 String garageName = (String) carJson.get("Garage");
@@ -146,21 +148,18 @@ public class Car implements Comparable<Car>{
         return cars;
     }
 
-    public static void exportJSONToFile(ArrayList<ArrayList<Car>> carsArrayList) {
+    public static void exportJSONToFile(ArrayList<Car> carsArrayList) {
 
             JSONObject jsonCars = new JSONObject();
 
             JSONArray carsArray = new JSONArray();
 
-            for (ArrayList<Car> garageCars : carsArrayList) {
-                for (Car car : garageCars) {
+            for (Car car : carsArrayList) {
                     JSONObject carJson = new JSONObject();
                     carJson.put("Brand", car.getBrand());
                     carJson.put("Model", car.getModel());
                     carJson.put("Garage", car.getGarageName());
-
                     carsArray.add(carJson);
-                }
             }
 
             jsonCars.put("Cars", carsArray);

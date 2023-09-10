@@ -13,7 +13,7 @@ public class Control {
     //region ATTRIBUTES
     private ArrayList<Garage> garages;
 
-    ArrayList<ArrayList<Car>> carsArrayList = new ArrayList<>();
+    ArrayList<Car> carsArray = new ArrayList<>();
     //endregion
 
     //region CONSTRUCTORS
@@ -32,12 +32,12 @@ public class Control {
     }
 
     public void ui(){
-        /**IMPORTANDO LOS DATOS A JSON AL INICIAR LA APLICACIÓN**/
+        /**IMPORTANDO LOS DATOS DESDE FICHERO JSON AL INICIAR LA APLICACIÓN**/
 
         Car c = new Car("","","");
 
         JSONParser parser = new JSONParser();
-
+/*
         JSONObject carJsonObject = null;
 
         try {
@@ -51,13 +51,38 @@ public class Control {
             e.printStackTrace();
         }
 
-        ArrayList<Car> arrayCar = c.importCarsFromJSON(carJsonObject);
+ */
+
+        carsArray = c.importCarsFromJSON("allCars.json");
         /*
         for(Car car : arrayCar){
             car.toString();
         }
 
          */
+
+        Garage g = new Garage();
+
+        JSONObject garageJsonObject = null;
+
+        try {
+            Object obj = parser.parse(new FileReader("allGarages.json"));
+
+            garageJsonObject = (JSONObject) obj;
+
+            System.out.println(garageJsonObject);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<Garage> arrayGarage = g.importGaragesFromJSON(garageJsonObject);
+/*
+        for(Garage garage : arrayGarage){
+            garage.toString();
+        }
+
+ */
 
         boolean on = true;
         boolean control = false;
@@ -79,7 +104,7 @@ public class Control {
                 case "0":
                     /**EXPORTANDO LOS DATOS A JSON ANTES DE CERRAR LA APLICACIÓN**/
 
-                    c.exportJSONToFile(carsArrayList);
+                    c.exportJSONToFile(carsArray);
                     on = false;
                     System.out.println("EXITING");
                     try {

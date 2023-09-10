@@ -53,10 +53,7 @@ public class Main {
         }
 
         ArrayList<Garage> arrayGarage = g.importGaragesFromJSON(garageJsonObject);
-
-        for(Garage garage : arrayGarage){
-            garage.toString();
-        }
+        
 
 
         //endregion
