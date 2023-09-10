@@ -6,14 +6,13 @@ import util.Input;
 
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 
 public class Control {
     //region ATTRIBUTES
-    private ArrayList<Garage> garages;
+    private ArrayList<Garage> garagesArray = new ArrayList<>();
 
-    ArrayList<Car> carsArray = new ArrayList<>();
+    private ArrayList<Car> carsArray = new ArrayList<>();
     //endregion
 
     //region CONSTRUCTORS
@@ -23,12 +22,12 @@ public class Control {
 
     //region METHODS
 
-    public ArrayList<Garage> getGarages() {
-        return garages;
+    public ArrayList<Garage> getGaragesArray() {
+        return garagesArray;
     }
 
-    public void setGarages(ArrayList<Garage> garages) {
-        this.garages = garages;
+    public void setGaragesArray(ArrayList<Garage> garagesArray) {
+        this.garagesArray = garagesArray;
     }
 
     public void ui(){
@@ -36,53 +35,13 @@ public class Control {
 
         Car c = new Car("","","");
 
-        JSONParser parser = new JSONParser();
-/*
-        JSONObject carJsonObject = null;
-
-        try {
-            Object obj = parser.parse(new FileReader("allCars.json"));
-
-            carJsonObject = (JSONObject) obj;
-
-            System.out.println(carJsonObject);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
- */
-
         carsArray = c.importCarsFromJSON("allCars.json");
-        /*
-        for(Car car : arrayCar){
-            car.toString();
-        }
 
-         */
+        //****************************************
 
         Garage g = new Garage();
 
-        JSONObject garageJsonObject = null;
-
-        try {
-            Object obj = parser.parse(new FileReader("allGarages.json"));
-
-            garageJsonObject = (JSONObject) obj;
-
-            System.out.println(garageJsonObject);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        ArrayList<Garage> arrayGarage = g.importGaragesFromJSON(garageJsonObject);
-/*
-        for(Garage garage : arrayGarage){
-            garage.toString();
-        }
-
- */
+        garagesArray = g.importGaragesFromJSON("allGarages.json");
 
         boolean on = true;
         boolean control = false;
@@ -105,6 +64,7 @@ public class Control {
                     /**EXPORTANDO LOS DATOS A JSON ANTES DE CERRAR LA APLICACIÓN**/
 
                     c.exportJSONToFile(carsArray);
+                    g.exportJSONToFile(garagesArray);
                     on = false;
                     System.out.println("EXITING");
                     try {
@@ -145,7 +105,7 @@ public class Control {
                                     System.out.println("*                                                        *");
                                     System.out.println("*            Select the GARAGE from the list:            *");
                                     System.out.println("*                                                        *");
-                                    Iterator<Garage> iterator = this.garages.iterator();
+                                    Iterator<Garage> iterator = this.garagesArray.iterator();
                                     while(iterator.hasNext()){
                                         garageIndex++;
                                         System.out.println(garageIndex+" "+iterator.next().getName());
@@ -161,7 +121,7 @@ public class Control {
                                             break;
                                         default:
                                             try{
-                                                System.out.println(this.garages.get(Integer.parseInt(standardRaceMenuAnswer)-1).getName());
+                                                System.out.println(this.garagesArray.get(Integer.parseInt(standardRaceMenuAnswer)-1).getName());
                                             }catch (NumberFormatException e){
                                                 System.out.println("INVALID COMMAND");
                                                 //e.printStackTrace();

@@ -88,10 +88,15 @@ public class Garage {
 
  */
 
-    public static ArrayList<Garage> importGaragesFromJSON(JSONObject jsonObj) {
+    public static ArrayList<Garage> importGaragesFromJSON(String filePath) {
         ArrayList<Garage> garages = new ArrayList<>();
 
         try {
+            JSONParser parser = new JSONParser();
+            Object obj = parser.parse(new FileReader(filePath));
+
+            JSONObject jsonObj = (JSONObject) obj;
+
             for (Object teamKey : jsonObj.keySet()) {
                 JSONObject teamJson = (JSONObject) jsonObj.get(teamKey);
                 String garageName = teamKey.toString();

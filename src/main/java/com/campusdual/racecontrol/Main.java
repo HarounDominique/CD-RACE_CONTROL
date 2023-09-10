@@ -10,54 +10,6 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
 
-        //region IMPORT JSON
-/*
-        Car c = new Car("","","");
-
-        JSONParser parser = new JSONParser();
-
-        JSONObject carJsonObject = null;
-
-        try {
-            Object obj = parser.parse(new FileReader("allCars.json"));
-
-            carJsonObject = (JSONObject) obj;
-
-            System.out.println(carJsonObject);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        ArrayList<Car> arrayCar = c.importCarsFromJSON(carJsonObject);
-        for(Car car : arrayCar){
-            car.toString();
-        }
-
- */
-
-        Garage g = new Garage();
-
-        JSONObject garageJsonObject = null;
-        JSONParser parser = new JSONParser();
-
-        try {
-            Object obj = parser.parse(new FileReader("allGarages.json"));
-
-            garageJsonObject = (JSONObject) obj;
-
-            System.out.println(garageJsonObject);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        ArrayList<Garage> arrayGarage = g.importGaragesFromJSON(garageJsonObject);
-        
-
-
-        //endregion
-
         //region GARAGES
         Garage citroen = new Garage("CitroënTeam");
         Garage subaru = new Garage("SubaruTeam");
