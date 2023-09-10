@@ -9,6 +9,7 @@ public abstract class Race {
 
     //#region ATTRIBUTES
     private String name;
+    private RaceType raceType;
     private ArrayList<Garage> participatingGarages;
     private ArrayList<Car> participatingCars;
     private ArrayList<Car> podium;
@@ -17,8 +18,9 @@ public abstract class Race {
 
     //#region CONSTRUCTORS
 
-    public Race(String name, int durationInMinutes, ArrayList<Garage> participatingGarages, ArrayList<Car> participatingCars) {
+    public Race(String name, RaceType raceType, int durationInMinutes, ArrayList<Garage> participatingGarages, ArrayList<Car> participatingCars) {
         this.name = name;
+        this.raceType = raceType;
         this.durationInMinutes = durationInMinutes;
         this.participatingGarages = participatingGarages;
         this.participatingCars = participatingCars;
@@ -35,11 +37,26 @@ public abstract class Race {
         this.participatingCars = participatingCars;
     }
 
+    public Race(String name, RaceType raceType, int duration) {
+        this.name = name;
+        this.raceType = raceType;
+        this.durationInMinutes = duration;
+    }
+
     public Race() {
     }
     //#endregion
 
     //#region METHODS
+
+
+    public RaceType getRaceType() {
+        return raceType;
+    }
+
+    public void setRaceType(RaceType raceType) {
+        this.raceType = raceType;
+    }
 
     public int getDurationInMinutes() {
         return durationInMinutes;

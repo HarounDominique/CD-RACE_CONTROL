@@ -1,18 +1,20 @@
 package com.campusdual.racecontrol;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import com.campusdual.racecontrol.races.Race;
+import com.campusdual.racecontrol.tournaments.Tournament;
 import util.Input;
 
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Control {
     //region ATTRIBUTES
-    private ArrayList<Garage> garagesArray = new ArrayList<>();
-
-    private ArrayList<Car> carsArray = new ArrayList<>();
+    private ArrayList<Garage> allGaragesArray = new ArrayList<>();
+    private ArrayList<Car> allCarsArray = new ArrayList<>();
+    private ArrayList<Car> participatingCarsArray = new ArrayList<>();
+    private ArrayList<Garage> participatingGaragesArray = new ArrayList<>();
+    private ArrayList<Race> allRacesArray = new ArrayList<>();
+    private ArrayList<Tournament> allTournamentsArray = new ArrayList<>();
     //endregion
 
     //region CONSTRUCTORS
@@ -30,12 +32,56 @@ public class Control {
         }
     }
 
-    public ArrayList<Garage> getGaragesArray() {
-        return garagesArray;
+    public ArrayList<Car> getAllCarsArray() {
+        return allCarsArray;
     }
 
-    public void setGaragesArray(ArrayList<Garage> garagesArray) {
-        this.garagesArray = garagesArray;
+    public void setAllCarsArray(ArrayList<Car> allCarsArray) {
+        this.allCarsArray = allCarsArray;
+    }
+
+    public ArrayList<Car> getParticipatingCarsArray() {
+        return participatingCarsArray;
+    }
+
+    public void setParticipatingCarsArray(ArrayList<Car> participatingCarsArray) {
+        this.participatingCarsArray = participatingCarsArray;
+    }
+
+    public ArrayList<Garage> getParticipatingGaragesArray() {
+        return participatingGaragesArray;
+    }
+
+    public void setParticipatingGaragesArray(ArrayList<Garage> participatingGaragesArray) {
+        this.participatingGaragesArray = participatingGaragesArray;
+    }
+
+    public ArrayList<Race> getAllRacesArray() {
+        return allRacesArray;
+    }
+
+    public void setAllRacesArray(ArrayList<Race> allRacesArray) {
+        this.allRacesArray = allRacesArray;
+    }
+
+    public void addToAllRacesArray(Race race) {
+        this.allRacesArray.add(race);
+    }
+
+    public ArrayList<Tournament> getAllTournamentsArray() {
+        return allTournamentsArray;
+    }
+
+    public void setAllTournamentsArray(ArrayList<Tournament> allTournamentsArray) {
+        this.allTournamentsArray = allTournamentsArray;
+    }
+
+    public ArrayList<Garage> getAllGaragesArray() {
+        return allGaragesArray;
+    }
+
+    public void setAllGaragesArray(ArrayList<Garage> allGaragesArray) {
+        this.allGaragesArray = allGaragesArray;
     }
 
     public void ui(){
@@ -43,13 +89,13 @@ public class Control {
 
         Car c = new Car("","","");
 
-        carsArray = c.importCarsFromJSON("allCars.json");
+        allCarsArray = c.importCarsFromJSON("allCars.json");
 
         //****************************************
 
         Garage g = new Garage();
 
-        garagesArray = g.importGaragesFromJSON("allGarages.json");
+        allGaragesArray = g.importGaragesFromJSON("allGarages.json");
 
         boolean on = true;
         boolean control = false;
@@ -69,8 +115,8 @@ public class Control {
                 case "0":
                     /**EXPORTANDO LOS DATOS A JSON ANTES DE CERRAR LA APLICACIÓN**/
 
-                    c.exportJSONToFile(carsArray);
-                    g.exportJSONToFile(garagesArray);
+                    c.exportJSONToFile(allCarsArray);
+                    g.exportJSONToFile(allGaragesArray);
                     on = false;
                     System.out.println("EXITING");
                     pause(1000);
@@ -110,7 +156,7 @@ public class Control {
                                     System.out.println("*                                                        *");
                                     System.out.println("*            Select the GARAGE from the list:            *");
                                     System.out.println("*                                                        *");
-                                    Iterator<Garage> iterator = this.garagesArray.iterator();
+                                    Iterator<Garage> iterator = this.allGaragesArray.iterator();
                                     while(iterator.hasNext()){
                                         garageIndex++;
                                         System.out.println(garageIndex+" "+iterator.next().getName());
@@ -127,9 +173,9 @@ public class Control {
 
                                         default:
                                             try{
-                                                System.out.println(this.garagesArray.get(Integer.parseInt(standardRaceMenuAnswer)-1).getName());
+                                                System.out.println(this.allGaragesArray.get(Integer.parseInt(standardRaceMenuAnswer)-1).getName());
                                                 int selectedGarageInteger = Integer.parseInt(standardRaceMenuAnswer.trim());
-                                                System.out.println("You selected "+garagesArray.get(selectedGarageInteger-1).getName());
+                                                System.out.println("You selected "+ allGaragesArray.get(selectedGarageInteger-1).getName());
                                                 garageIndex = 0;
                                             } catch (NumberFormatException nfe) {
                                                 System.out.println("ERROR: INVALID NUMBER FORMAT");

@@ -9,6 +9,7 @@ public class StandardRace extends Race {
     //region ATTRIBUTES
     public final String NAME = "Standard race";
     public final int DURATION = 180;
+    public final RaceType RACE_TYPE = RaceType.STANDARD;
     //endregion
 
     //region CONSTRUCTOR
@@ -16,6 +17,13 @@ public class StandardRace extends Race {
         super(participatingGarages, participatingCars);
         super.setName(this.NAME);
         super.setDurationInMinutes(this.DURATION);
+        super.setRaceType(this.RACE_TYPE);
+    }
+
+    public StandardRace() {
+        super.setName(this.NAME);
+        super.setDurationInMinutes(this.DURATION);
+        super.setRaceType(this.RACE_TYPE);
     }
     //endregion
 
