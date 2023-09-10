@@ -86,12 +86,13 @@ public class Control {
                         System.out.println("*                                                        *");
                         System.out.println("*      Insert '2' to enter the ELIMINATION RACE MENU     *");
                         System.out.println("*                                                        *");
+                        System.out.println("*               Insert '3' to MANAGE RACES               *");
                         System.out.print("* >>> ");
                         String raceMenuAnswer = Input.string();
                         switch (raceMenuAnswer.trim()){
                             case "0":
                                 //validRaceMenuAnswer = true;
-                                ui(); //todo probar a quitar ui() solo con el break debería retroceder
+                                ui();
                                 break;
                             case "1":
                                 //validRaceMenuAnswer = true;
@@ -117,7 +118,7 @@ public class Control {
                                         case "0":
                                             garageIndex = 0;
                                             //validStandardRaceMenuAnswer = true;
-                                            ui(); //todo probar a quitar ui() solo con el break debería retroceder
+                                            ui();
                                             break;
                                         default:
                                             try{
@@ -130,6 +131,7 @@ public class Control {
                                     }
                                 }while(!validStandardRaceMenuAnswer);
                                 break;
+
                             case "2":
                                 //validRaceMenuAnswer = true;
                                 boolean validEliminationRaceMenuAnswer = false;
@@ -146,7 +148,7 @@ public class Control {
                                     switch (eliminationRaceMenuAnswer.trim()){
                                         case "0":
                                             //validEliminationRaceMenuAnswer = true;
-                                            ui(); //todo probar a quitar ui() solo con el break debería retroceder
+                                            ui();
                                             break;
                                         case "1":
                                             break;
@@ -156,6 +158,33 @@ public class Control {
                                     }
                                 }while(!validEliminationRaceMenuAnswer);
                                 break;
+
+                            case "3":
+                                boolean validManageRaceMenuAnswer = false;
+                                do {
+                                    System.out.println("*********************| RACE CONTROL |*********************");
+                                    System.out.println("*****************| MANAGEMENT  RACE MENU |****************");
+                                    System.out.println("*                                                        *");
+                                    System.out.println("*                 Insert '0' to GO BACK                  *");
+                                    System.out.println("*                                                        *");
+                                    System.out.println("*            Select the GARAGE from the list:            *");
+                                    System.out.println("*                                                        *");
+                                    System.out.print("* >>> ");
+                                    String manageRaceMenuAnswer = Input.string();
+                                    switch (manageRaceMenuAnswer.trim()){
+                                        case "0":
+                                            //validEliminationRaceMenuAnswer = true;
+                                            ui();
+                                            break;
+                                        case "1":
+                                            break;
+                                        default:
+                                            System.out.println("INVALID COMMAND");
+                                            break;
+                                    }
+                                }while(!validManageRaceMenuAnswer);
+                                break;
+
                             default:
                                 System.out.println("INVALID COMMAND");
                                 try {
