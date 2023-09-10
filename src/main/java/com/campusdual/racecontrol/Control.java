@@ -184,7 +184,7 @@ public class Control {
                                                 do{
                                                     System.out.println("*********************| RACE CONTROL |*********************");
                                                     System.out.println("*********************|  RACE  MENU  |*********************");
-                                                    System.out.println("********************|GARAGE SELECTION|*********************");
+                                                    System.out.println("*****************|FIRST GARAGE SELECTION|*****************");
                                                     System.out.println("*                                                        *");
                                                     System.out.println("*                 Insert '0' to GO BACK                  *");
                                                     System.out.println("*                                                        *");
@@ -196,7 +196,8 @@ public class Control {
                                                     Iterator<Garage> garageIterator = this.allGaragesArray.iterator();
                                                     while (garageIterator.hasNext()) {
                                                         garageIndex++;
-                                                        System.out.println("     "+garageIndex + " | " + garageIterator.next().getName());
+                                                        Garage firstGarageIteration = garageIterator.next();
+                                                        System.out.println("     "+garageIndex + " | " + firstGarageIteration.getName());
                                                     }
                                                     System.out.print("* >>> ");
                                                     String garageSelectionAnswer = Input.string();
@@ -219,7 +220,7 @@ public class Control {
                                                                 do {
                                                                     System.out.println("*********************| RACE CONTROL |*********************");
                                                                     System.out.println("*********************|  RACE  MENU  |*********************");
-                                                                    System.out.println("********************|GARAGE SELECTION|*********************");
+                                                                    System.out.println("*****************|SECOND GARAGE SELECTION|****************");
                                                                     System.out.println("*                                                        *");
                                                                     System.out.println("*                 Insert '0' to GO BACK                  *");
                                                                     System.out.println("*                                                        *");
@@ -230,8 +231,11 @@ public class Control {
                                                                     System.out.println("* INDEX| GARAGE NAME                                   *");
                                                                     Iterator<Garage> secondGarageIterator = this.allGaragesArray.iterator();
                                                                     while (secondGarageIterator.hasNext()) {
-                                                                        garageIndex++;
-                                                                        System.out.println("     " + garageIndex + " | " + secondGarageIterator.next().getName());
+                                                                        Garage secondGarageIteration = secondGarageIterator.next();
+                                                                        if(!secondGarageIteration.getName().equals(firstGarage.getName())){
+                                                                            garageIndex++;
+                                                                            System.out.println("     " + garageIndex + " | " + secondGarageIteration.getName());
+                                                                        }
                                                                     }
                                                                     System.out.print("* >>> ");
                                                                     String garageSecondSelectionAnswer = Input.string();
@@ -243,6 +247,7 @@ public class Control {
                                                                             break;
 
                                                                         default:
+
                                                                             break;
                                                                     }
                                                                 }while(!validSecondGarageSelection);
