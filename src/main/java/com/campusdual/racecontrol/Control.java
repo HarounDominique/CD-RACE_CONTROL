@@ -1,13 +1,19 @@
 package com.campusdual.racecontrol;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import util.Input;
 
+import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 
 public class Control {
     //region ATTRIBUTES
     private ArrayList<Garage> garages;
+
+    ArrayList<ArrayList<Car>> carsArrayList = new ArrayList<>();
     //endregion
 
     //region CONSTRUCTORS
@@ -26,6 +32,33 @@ public class Control {
     }
 
     public void ui(){
+        /**IMPORTANDO LOS DATOS A JSON AL INICIAR LA APLICACIÓN**/
+
+        Car c = new Car("","","");
+
+        JSONParser parser = new JSONParser();
+
+        JSONObject carJsonObject = null;
+
+        try {
+            Object obj = parser.parse(new FileReader("allCars.json"));
+
+            carJsonObject = (JSONObject) obj;
+
+            System.out.println(carJsonObject);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<Car> arrayCar = c.importCarsFromJSON(carJsonObject);
+        /*
+        for(Car car : arrayCar){
+            car.toString();
+        }
+
+         */
+
         boolean on = true;
         boolean control = false;
         do {
@@ -44,6 +77,9 @@ public class Control {
             String answer = Input.string();
             switch (answer.trim()) {
                 case "0":
+                    /**EXPORTANDO LOS DATOS A JSON ANTES DE CERRAR LA APLICACIÓN**/
+
+                    c.exportJSONToFile(carsArrayList);
                     on = false;
                     System.out.println("EXITING");
                     try {

@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
 
         //region IMPORT JSON
-
+/*
         Car c = new Car("","","");
 
         JSONParser parser = new JSONParser();
@@ -34,9 +34,12 @@ public class Main {
             car.toString();
         }
 
+ */
+
         Garage g = new Garage();
 
         JSONObject garageJsonObject = null;
+        JSONParser parser = new JSONParser();
 
         try {
             Object obj = parser.parse(new FileReader("allGarages.json"));
@@ -50,13 +53,10 @@ public class Main {
         }
 
         ArrayList<Garage> arrayGarage = g.importGaragesFromJSON(garageJsonObject);
-        
+
         for(Garage garage : arrayGarage){
             garage.toString();
         }
-
-
-
 
 
         //endregion
