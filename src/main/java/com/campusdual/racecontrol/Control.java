@@ -55,8 +55,6 @@ public class Control {
             System.out.println("*                                                        *");
             System.out.println("*         Insert '2' to enter the TOURNAMENT MENU        *");
             System.out.println("*                                                        *");
-            System.out.println("*         Insert '3' to enter the MANAGEMENT MENU        *");
-            System.out.println("*                                                        *");
             System.out.print("* >>> ");
             String answer = Input.string();
             switch (answer.trim()) {
@@ -74,6 +72,7 @@ public class Control {
                     }
                     System.exit(0);
                     break;
+
                 case "1":
                     boolean validRaceMenuAnswer = false;
                     do {
@@ -94,6 +93,7 @@ public class Control {
                                 //validRaceMenuAnswer = true;
                                 ui();
                                 break;
+
                             case "1":
                                 //validRaceMenuAnswer = true;
                                 boolean validStandardRaceMenuAnswer = false;
@@ -120,12 +120,17 @@ public class Control {
                                             //validStandardRaceMenuAnswer = true;
                                             ui();
                                             break;
+
                                         default:
                                             try{
                                                 System.out.println(this.garagesArray.get(Integer.parseInt(standardRaceMenuAnswer)-1).getName());
-                                            }catch (NumberFormatException e){
-                                                System.out.println("INVALID COMMAND");
-                                                //e.printStackTrace();
+                                                int selectedGarageInteger = Integer.parseInt(standardRaceMenuAnswer.trim());
+                                                System.out.println("You selected "+garagesArray.get(selectedGarageInteger-1).getName());
+                                                garageIndex = 0;
+                                            } catch (NumberFormatException nfe) {
+                                                System.out.println("ERROR: INVALID NUMBER FORMAT");
+                                            } catch (IndexOutOfBoundsException ioobe) {
+                                                System.out.println("INVALID OPTION");
                                             }
                                             break;
                                     }
@@ -150,11 +155,14 @@ public class Control {
                                             //validEliminationRaceMenuAnswer = true;
                                             ui();
                                             break;
+
                                         case "1":
                                             break;
+
                                         default:
                                             System.out.println("INVALID COMMAND");
                                             break;
+
                                     }
                                 }while(!validEliminationRaceMenuAnswer);
                                 break;
@@ -176,11 +184,14 @@ public class Control {
                                             //validEliminationRaceMenuAnswer = true;
                                             ui();
                                             break;
+
                                         case "1":
                                             break;
+
                                         default:
                                             System.out.println("INVALID COMMAND");
                                             break;
+
                                     }
                                 }while(!validManageRaceMenuAnswer);
                                 break;
@@ -215,51 +226,26 @@ public class Control {
                                 ui();
                                 //validTournamentMenuAnswer = true;
                                 break;
+
                             case "1":
                                 break;
+
                             default:
                                 System.out.println("INVALID COMMAND");
                                 break;
+
                         }
                     }while(!validTournamentMenuAnswer);
                     break;
-                case "3":
-                    boolean validManagementMenuAnswer = false;
-                    do {
-                        System.out.println("*********************| RACE CONTROL |*********************");
-                        System.out.println("********************|MANAGEMENT  MENU|********************");
-                        System.out.println("*                                                        *");
-                        System.out.println("*                 Insert '0' to GO BACK                  *");
-                        System.out.println("*                                                        *");
-                        System.out.println("*          Insert '1' to enter the GARAGES MENU          *");
-                        System.out.println("*                                                        *");
-                        System.out.println("*           Insert '2' to enter the CARS MENU            *");
-                        System.out.println("*                                                        *");
-                        System.out.print("* >>> ");
-                        String managementMenuAnswer = Input.string();
-                        switch (managementMenuAnswer.trim()){
-                            case "0":
-                                ui();
-                                //validTournamentMenuAnswer = true;
-                                break;
-                            case "1":
-                                break;
-                            case "2":
-                                break;
-                            default:
-                                System.out.println("INVALID COMMAND");
-                                break;
-                        }
-                    }while(!validManagementMenuAnswer);
-                    break;
                 default:
-                    System.out.println("NON-EXISTENT COMMAND");
+                    System.out.println("INVALID COMMAND");
                     try {
                         Thread.sleep(2000);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
                     break;
+
             }
             if (control) {
                 System.exit(0);
