@@ -63,7 +63,6 @@ public abstract class Race {
             raceJson.put("RaceType", race.getRaceType().name());
             raceJson.put("DurationInMinutes", race.getDurationInMinutes());
 
-            // Verifica si los campos adicionales están definidos
             if (race.getParticipatingGarages() != null) {
                 raceJson.put("ParticipatingGarages", race.getParticipatingGarages());
             } else {
@@ -142,7 +141,7 @@ public abstract class Race {
         this.podium = podium;
     }
 
-    public abstract void startRace();
+    public abstract void startRace(ArrayList<Car> participatingCars);
 
     protected void addToPodium(Car car) {
         podium.add(car);

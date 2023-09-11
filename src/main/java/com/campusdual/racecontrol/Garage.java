@@ -3,6 +3,7 @@ package com.campusdual.racecontrol;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import util.Utils;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -51,42 +52,6 @@ public class Garage {
     }
 
     //import/export
-    /*
-    public JSONObject exportGarage(){
-        JSONObject obj = new JSONObject();
-        obj.put(Garage.NAME, this.getName());
-        obj.put(Garage.CARS, this.getCars());
-        return obj;
-    }
-
-     */
-
-    public JSONObject exportGarage() {
-
-        JSONObject garageJson = new JSONObject();
-
-        garageJson.put(Garage.NAME, this.getName());
-        JSONArray carsArray = new JSONArray();
-        garageJson.put(Garage.CARS, carsArray);
-        for (Car car : this.getCars()) {
-            JSONObject carJson = new JSONObject();
-            carJson.put(car.BRAND, car.getBrand());
-            carJson.put(car.MODEL, car.getModel());
-            carsArray.add(carJson);
-        }
-
-
-        return garageJson;
-    }
-/*
-    public static Car importCar(JSONObject obj){
-        String model = (String)obj.get(Car.MODEL);
-        String brand = (String)obj.get(Car.BRAND);
-        String garage = (String)obj.get(Car.GARAGE);
-        return new Car(brand, model, garage);
-    }
-
- */
 
     public static ArrayList<Garage> importGaragesFromJSON(String filePath) {
         ArrayList<Garage> garages = new ArrayList<>();
@@ -164,13 +129,14 @@ public class Garage {
     }
 
     public Car getRandomCar() {
+        Car participatingCar = null;
         if (cars.isEmpty()) {
-            throw new IllegalStateException("There are no cars in the garage");
+            throw new IllegalStateException("There are no cars in the "+this.name+" garage.");
+        }else{
+            int participatingCarIndex = Utils.getRandomNumberInRange(1, this.getCars().size());
+            participatingCar = this.cars.get(participatingCarIndex);
         }
-
-        Random random = new Random();
-        int index = random.nextInt(cars.size());
-        return cars.get(index);
+        return participatingCar;
     }
     //#endregion
 

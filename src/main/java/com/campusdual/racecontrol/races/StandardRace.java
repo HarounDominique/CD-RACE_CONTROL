@@ -29,8 +29,14 @@ public class StandardRace extends Race {
 
     //region METHODS
     @Override
-    public void startRace() {
+    public void startRace(ArrayList<Car> participatingCars) {
         //todo actualizar el podium cuando finaliza la carrera
+        Car fastestCar
+        for(int i = 0; i<this.DURATION; i++){
+            for(Car c : participatingCars){
+                c.speedometerByCycle();
+            }
+        }
     }
     //endregion
 }

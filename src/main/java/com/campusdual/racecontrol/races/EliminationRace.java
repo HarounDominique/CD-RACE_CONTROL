@@ -39,7 +39,7 @@ public class EliminationRace extends Race {
 
     //region METHODS
     @Override
-    public void startRace() {
+    public void startRace(ArrayList<Car> participationCars) {
     }
     //endregion
 }
