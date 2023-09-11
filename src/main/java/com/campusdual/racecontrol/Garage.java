@@ -133,7 +133,7 @@ public class Garage {
         if (cars.isEmpty()) {
             throw new IllegalStateException("There are no cars in the "+this.name+" garage.");
         }else{
-            int participatingCarIndex = Utils.getRandomNumberInRange(1, this.getCars().size());
+            int participatingCarIndex = Utils.getRandomNumberInRange(0, this.getCars().size()-1);
             participatingCar = this.cars.get(participatingCarIndex);
         }
         return participatingCar;

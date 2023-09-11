@@ -223,7 +223,7 @@ public class Control {
                                                     System.out.println("*             Select a GARAGE to PARTICIPATE:            *");
                                                     System.out.println("*                                                        *");
                                                     System.out.println("* INDEX| GARAGE NAME                                   *");
-                                                    Iterator<Garage> garageIterator = this.showGaragesArray.iterator();
+                                                    Iterator<Garage> garageIterator = this.allGaragesArray.iterator();
                                                     while (garageIterator.hasNext()) {
                                                         garageIndex++;
                                                         Garage firstGarageIteration = garageIterator.next();
@@ -241,9 +241,9 @@ public class Control {
                                                         default:
                                                             try {
                                                                 selectedGarageIndex = Integer.parseInt(garageSelectionAnswer.trim());
-                                                                System.out.println("You selected " + showGaragesArray.get(selectedGarageIndex - 1).getName());
-                                                                this.firstParticipatingGarage = showGaragesArray.get(selectedGarageIndex - 1);
-                                                                showGaragesArray.remove(selectedGarageIndex - 1);
+                                                                System.out.println("You selected " + this.allGaragesArray.get(selectedGarageIndex - 1).getName());
+                                                                this.firstParticipatingGarage = this.allGaragesArray.get(selectedGarageIndex - 1);
+                                                                this.showGaragesArray.remove(selectedGarageIndex - 1);
                                                                 garageIndex = 0;
                                                                 pause(500);
                                                                 validGarageSelection = true;
@@ -288,6 +288,7 @@ public class Control {
                                                                                 this.secondParticipatingGarage = showGaragesArray.get(secondSelectedGarageIndex -1);
                                                                                 validSecondGarageSelection = true;
                                                                                 secondGarageIndex = 0;
+                                                                                //secondSelectedGarageIndex=0;
                                                                                 pause(500);
 
                                                                                 selectParticipatingCars(firstParticipatingGarage, secondParticipatingGarage);
@@ -299,7 +300,8 @@ public class Control {
                                                                                 pause(1000);
                                                                             } catch (IndexOutOfBoundsException ioobe) {
                                                                                 System.out.println("INVALID OPTION (SECOND GARAGE)");
-                                                                                //ioobe.printStackTrace();
+                                                                                ioobe.printStackTrace();
+                                                                                ioobe.getLocalizedMessage();
                                                                                 pause(1000);
                                                                             }
                                                                             break;
