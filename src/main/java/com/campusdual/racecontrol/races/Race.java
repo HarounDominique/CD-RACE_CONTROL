@@ -141,7 +141,7 @@ public abstract class Race {
         this.podium = podium;
     }
 
-    public abstract void startRace(ArrayList<Car> participatingCars);
+    public abstract void startRace();
 
     protected void addToPodium(Car car) {
         podium.add(car);

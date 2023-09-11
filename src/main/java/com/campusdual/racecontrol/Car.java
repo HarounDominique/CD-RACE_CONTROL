@@ -111,16 +111,6 @@ public class Car implements Comparable<Car>{
     }
 
     //import/export
-/*
-    public JSONObject exportCar(){
-        JSONObject obj = new JSONObject();
-        obj.put(Car.BRAND, this.getBrand());
-        obj.put(Car.MODEL, this.getModel());
-        obj.put(Car.GARAGE, this.getGarageName());
-        return obj;
-    }
-
- */
 
 
     public static ArrayList<Car> importCarsFromJSON(String filePath) {
@@ -168,6 +158,7 @@ public class Car implements Comparable<Car>{
         try {
             FileWriter fileWriter = new FileWriter("allCars.json");
             fileWriter.write(jsonCars.toJSONString());
+            fileWriter.flush();
             fileWriter.close();
 
             System.out.println("Los COCHES se han guardado en el archivo JSON.");
@@ -176,18 +167,6 @@ public class Car implements Comparable<Car>{
             System.out.println("ERROR: Los COCHES NO se han guardado en el archivo JSON.");
         }
     }
-/*
-    public static JSONObject importJSONToFile(String fileName){
-        try(FileReader r = new FileReader(fileName)){
-            JSONParser parser = new JSONParser();
-            JSONObject obj = (JSONObject)parser.parse(r);
-            return obj;
-        }catch(Exception e){
-            return null;
-        }
-    }
-
- */
 
     //endregion
 
