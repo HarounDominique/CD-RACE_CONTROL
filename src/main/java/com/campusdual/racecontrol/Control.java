@@ -281,11 +281,8 @@ public class Control {
                                                                         default:
                                                                             try {
                                                                                 secondSelectedGarageIndex = Integer.parseInt(garageSecondSelectionAnswer.trim());
-                                                                                if(secondSelectedGarageIndex >= selectedGarageIndex){
-                                                                                    secondSelectedGarageIndex++;
-                                                                                }
-                                                                                System.out.println("You selected " + showGaragesArray.get(secondSelectedGarageIndex - 1).getName());
-                                                                                this.secondParticipatingGarage = showGaragesArray.get(secondSelectedGarageIndex - 1);
+                                                                                System.out.println("You selected " + showGaragesArray.get(secondSelectedGarageIndex -1).getName());
+                                                                                this.secondParticipatingGarage = showGaragesArray.get(secondSelectedGarageIndex -1);
                                                                                 validSecondGarageSelection = true;
                                                                                 secondGarageIndex = 0;
                                                                                 pause(500);
@@ -298,7 +295,8 @@ public class Control {
                                                                                 System.out.println("ERROR: INVALID NUMBER FORMAT");
                                                                                 pause(1000);
                                                                             } catch (IndexOutOfBoundsException ioobe) {
-                                                                                System.out.println("INVALID OPTION");
+                                                                                System.out.println("INVALID OPTION (SECOND GARAGE)");
+                                                                                ioobe.printStackTrace();
                                                                                 pause(1000);
                                                                             }
                                                                             break;
@@ -311,7 +309,8 @@ public class Control {
                                                                 System.out.println("ERROR: INVALID NUMBER FORMAT");
                                                                 pause(1000);
                                                             } catch (IndexOutOfBoundsException ioobe) {
-                                                                System.out.println("INVALID OPTION");
+                                                                ioobe.printStackTrace();
+                                                                System.out.println("INVALID OPTION (FIRST GARAGE)");
                                                                 pause(1000);
                                                             }
                                                             break;
