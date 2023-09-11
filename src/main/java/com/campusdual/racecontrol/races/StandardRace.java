@@ -14,6 +14,13 @@ public class StandardRace extends Race {
     //endregion
 
     //region CONSTRUCTOR
+
+    public StandardRace(String name, int duration) {
+        super.setName(name);
+        super.setDurationInMinutes(duration);
+        super.setRaceType(this.RACE_TYPE);
+    }
+
     public StandardRace(ArrayList<Garage> participatingGarages, ArrayList<Car> participatingCars) {
         super(participatingGarages, participatingCars);
         super.setName(this.NAME);

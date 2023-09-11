@@ -1,11 +1,14 @@
 package com.campusdual.racecontrol;
 
+import com.campusdual.racecontrol.races.EliminationRace;
 import com.campusdual.racecontrol.races.Race;
+import com.campusdual.racecontrol.races.RaceType;
 import com.campusdual.racecontrol.races.StandardRace;
 import com.campusdual.racecontrol.tournaments.Tournament;
 import util.Input;
 import util.Utils;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -172,7 +175,7 @@ public class Control {
                                 do {
                                     System.out.println("*********************| RACE CONTROL |*********************");
                                     System.out.println("*********************|  RACE  MENU  |*********************");
-                                    System.out.println("*********************|   RACE LIST  |*********************");
+                                    System.out.println("*********************|  RACE  LIST  |*********************");
                                     System.out.println("*                                                        *");
                                     System.out.println("*                 Insert '0' to GO BACK                  *");
                                     System.out.println("*                                                        *");
@@ -296,12 +299,12 @@ public class Control {
                                                                                 pause(1000);
                                                                             } catch (IndexOutOfBoundsException ioobe) {
                                                                                 System.out.println("INVALID OPTION (SECOND GARAGE)");
-                                                                                ioobe.printStackTrace();
+                                                                                //ioobe.printStackTrace();
                                                                                 pause(1000);
                                                                             }
                                                                             break;
 
-                                                                            /**EN ESTE PUNTO EL USUARIO HA ESCOGIGO LA CARRERA QUE QUIERE CORRER Y, AL MENOS, UN GARAJE PARTICIPANTE**/
+                                                                            /**HERE ENDS STANDARD RACE MENUS**/
 
                                                                     }
                                                                 }while(!validSecondGarageSelection);
@@ -309,7 +312,7 @@ public class Control {
                                                                 System.out.println("ERROR: INVALID NUMBER FORMAT");
                                                                 pause(1000);
                                                             } catch (IndexOutOfBoundsException ioobe) {
-                                                                ioobe.printStackTrace();
+                                                                //ioobe.printStackTrace();
                                                                 System.out.println("INVALID OPTION (FIRST GARAGE)");
                                                                 pause(1000);
                                                             }
@@ -331,31 +334,78 @@ public class Control {
 
                                             break;
 
-
                                     }
                                 } while (!validRaceListAnswer);
                                 //break;
                             case "2":
-                                boolean validTournamentMenuAnswer = false;
+                                boolean validRaceManagementAnswer = false;
                                 do {
                                     System.out.println("*********************| RACE CONTROL |*********************");
-                                    System.out.println("********************|TOURNAMENT  MENU|********************");
+                                    System.out.println("********************|RACE  MANAGEMENT|********************");
                                     System.out.println("*                                                        *");
                                     System.out.println("*                 Insert '0' to GO BACK                  *");
                                     System.out.println("*                                                        *");
-                                    System.out.println("*            Insert '1' to enter the RACE MENU           *");
+                                    System.out.println("*              Insert '1' to ADD a new RACE              *");
                                     System.out.println("*                                                        *");
-                                    System.out.println("*         Insert '2' to enter the TOURNAMENT MENU        *");
+                                    System.out.println("*           Insert '2' to REMOVE an existent RACE        *");
                                     System.out.println("*                                                        *");
                                     System.out.print("* >>> ");
                                     String tournamentMenuAnswer = Input.string();
                                     switch (tournamentMenuAnswer.trim()) {
                                         case "0":
+                                            validRaceManagementAnswer = true;
                                             ui();
-                                            //validTournamentMenuAnswer = true;
                                             break;
 
                                         case "1":
+                                            validRaceManagementAnswer = true;
+                                            System.out.println("Insert a race name:");
+                                            String raceName = Input.string();
+                                            RaceType raceType = null;
+                                            int raceDuration = 180;
+                                            Race race = null;
+                                            boolean invalidTypeRace = true;
+                                            do {
+                                                System.out.println("Insert 1 for STANDARD race or 2 for ELIMINATION race:");
+                                                try {
+                                                    String raceTypeAnswer = Input.string().trim();
+                                                    switch (raceTypeAnswer){
+                                                        case "1":
+                                                            raceType = RaceType.STANDARD;
+                                                            invalidTypeRace = false;
+                                                            break;
+                                                        case "2":
+                                                            raceType = RaceType.ELIMINAT;
+                                                            invalidTypeRace = false;
+                                                            break;
+                                                        default:
+                                                            System.out.println("ERROR: Race type non-valid");
+                                                            break;
+                                                    }
+                                                } catch (Exception e) {
+                                                    e.printStackTrace();
+                                                }
+                                                System.out.println("Insert the race DURATION in minutes:");
+                                                try{
+                                                    raceDuration = Input.integer();
+                                                }catch (Exception e){
+                                                    System.out.println("ERROR: Duration must be an integer. A default value (180) will be set.");
+                                                    //e.printStackTrace();
+                                                }
+                                                if(raceType.equals(RaceType.STANDARD)){
+                                                    race = new StandardRace(raceName, raceDuration);
+                                                }else if(raceType.equals(RaceType.ELIMINAT)){
+                                                    race = new EliminationRace(raceName, raceDuration);
+                                                }
+                                                this.allRacesArray.add(race);
+                                                System.out.println("Race successfully added");
+                                                pause(1000);
+                                                ui();
+                                            }while(invalidTypeRace);
+                                            break;
+
+                                        case "2":
+                                            validRaceManagementAnswer = true;
                                             break;
 
                                         default:
@@ -364,7 +414,7 @@ public class Control {
                                             break;
 
                                     }
-                                } while (!validTournamentMenuAnswer);
+                                } while (!validRaceManagementAnswer);
                                 break;
                             default:
                                 System.out.println("INVALID COMMAND");

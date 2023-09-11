@@ -14,6 +14,12 @@ public class EliminationRace extends Race {
 
     //region CONSTRUCTORS
 
+    public EliminationRace(String name, int duration) {
+        super.setName(name);
+        super.setDurationInMinutes(duration);
+        super.setRaceType(this.RACE_TYPE);
+    }
+
     public EliminationRace() {
         super.setName(this.NAME);
         super.setDurationInMinutes(this.DURATION);
