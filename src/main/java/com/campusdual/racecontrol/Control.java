@@ -261,6 +261,7 @@ public class Control {
                                                                     Iterator<Garage> secondGarageIterator = this.showGaragesArray.iterator();
                                                                     while (secondGarageIterator.hasNext()) {
                                                                         Garage secondGarageIteration = secondGarageIterator.next();
+                                                                        secondGarageIndex++;
                                                                         System.out.println("     " + secondGarageIndex + " | " + secondGarageIteration.getName());
                                                                     }
                                                                     System.out.print("* >>> ");
