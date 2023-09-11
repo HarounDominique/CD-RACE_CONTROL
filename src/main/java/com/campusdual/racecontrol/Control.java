@@ -181,6 +181,8 @@ public class Control {
 
                                                 Garage firstGarage;
                                                 Garage secondGarage;
+                                                int selectedGarageIndex;
+                                                int secondSelectedGarageIndex;
                                                 do{
                                                     System.out.println("*********************| RACE CONTROL |*********************");
                                                     System.out.println("*********************|  RACE  MENU  |*********************");
@@ -210,7 +212,7 @@ public class Control {
 
                                                         default:
                                                             try {
-                                                                int selectedGarageIndex = Integer.parseInt(garageSelectionAnswer.trim());
+                                                                selectedGarageIndex = Integer.parseInt(garageSelectionAnswer.trim());
                                                                 System.out.println("You selected " + allGaragesArray.get(selectedGarageIndex - 1).getName());
                                                                 firstGarage = allGaragesArray.get(selectedGarageIndex - 1);
                                                                 garageIndex = 0;
@@ -248,9 +250,13 @@ public class Control {
 
                                                                         default:
                                                                             try {
-                                                                                int secondSelectedGarageIndex = Integer.parseInt(garageSecondSelectionAnswer.trim());
+                                                                                secondSelectedGarageIndex = Integer.parseInt(garageSecondSelectionAnswer.trim());
+                                                                                if(secondSelectedGarageIndex >= selectedGarageIndex){
+                                                                                    secondSelectedGarageIndex++;
+                                                                                }
                                                                                 System.out.println("You selected " + allGaragesArray.get(secondSelectedGarageIndex - 1).getName());
                                                                                 secondGarage = allGaragesArray.get(secondSelectedGarageIndex - 1);
+                                                                                validSecondGarageSelection = true;
                                                                                 garageIndex = 0;
                                                                                 pause(500);
 
@@ -262,6 +268,10 @@ public class Control {
                                                                                 pause(1000);
                                                                             }
                                                                             break;
+
+                                                                            /**EN ESTE PUNTO EL USUARIO HA ESCOGIGO LA CARRERA QUE QUIERE CORRER Y, AL MENOS, UN GARAJE PARTICIPANTE**/
+
+
                                                                     }
                                                                 }while(!validSecondGarageSelection);
                                                             } catch (NumberFormatException nfe) {
