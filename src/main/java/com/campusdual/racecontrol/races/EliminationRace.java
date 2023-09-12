@@ -27,19 +27,13 @@ public class EliminationRace extends Race {
     }
     public EliminationRace(String name, RaceType raceType, int durationInMinutes, ArrayList<Garage> participatingGarages, ArrayList<Car> participatingCars) {
         super(name, raceType, durationInMinutes, participatingGarages, participatingCars);
+        super.setRaceType(this.RACE_TYPE);
     }
 
     public EliminationRace(String name, int duration, ArrayList<Garage> participatingGarages, ArrayList<Car> participatingCars) {
         super(name, participatingGarages, participatingCars);
         super.setDurationInMinutes(duration);
-    }
-
-    public EliminationRace(String name, ArrayList<Garage> participatingGarages, ArrayList<Car> participatingCars) {
-        super(name, participatingGarages, participatingCars);
-    }
-    public EliminationRace(ArrayList<Garage> participatingGarages, ArrayList<Car> garagesCars) {
-        super(participatingGarages, garagesCars);
-        super.setName(this.NAME);
+        super.setRaceType(this.RACE_TYPE);
     }
 
     public EliminationRace(String name, RaceType raceType, int duration) {

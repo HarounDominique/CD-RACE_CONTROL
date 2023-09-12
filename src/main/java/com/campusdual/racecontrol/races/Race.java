@@ -161,19 +161,20 @@ public abstract class Race {
             if (race.getRaceType() != null) {
                 raceJson.put("RaceType", race.getRaceType().name());
             } else {
+                //de serlo, pone 'STANDARD' como tipo por defecto
                 raceJson.put("RaceType", RaceType.STANDARD.name());
             }
 
             raceJson.put("DurationInMinutes", race.getDurationInMinutes());
 
-            // Corrección: Almacena ParticipatingGarages como un arreglo JSON vacío si es nulo.
+            // Almacena ParticipatingGarages como un arreglo JSON vacío si es nulo.
             if (race.getParticipatingGarages() != null) {
                 raceJson.put("ParticipatingGarages", race.getParticipatingGarages());
             } else {
                 raceJson.put("ParticipatingGarages", new JSONArray());
             }
 
-            // Corrección: Almacena ParticipatingCars como un arreglo JSON vacío si es nulo.
+            // Almacena ParticipatingCars como un arreglo JSON vacío si es nulo.
             if (race.getParticipatingCars() != null) {
                 raceJson.put("ParticipatingCars", race.getParticipatingCars());
             } else {

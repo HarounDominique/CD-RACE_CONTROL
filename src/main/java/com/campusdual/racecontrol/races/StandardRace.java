@@ -24,6 +24,7 @@ public class StandardRace extends Race {
     public StandardRace(String name, int duration, ArrayList<Garage> participatingGarages, ArrayList<Car> participatingCars) {
         super(name, participatingGarages, participatingCars);
         super.setDurationInMinutes(duration);
+        super.setRaceType(this.RACE_TYPE);
     }
 
     public StandardRace(ArrayList<Garage> participatingGarages, ArrayList<Car> participatingCars) {
