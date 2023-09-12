@@ -1,1 +1,1 @@
-{"Races":[{"DurationInMinutes":180,"RaceType":"STANDARD","ParticipatingCars":"null","ParticipatingGarages":"null","Name":"Standard    race"},{"DurationInMinutes":180,"RaceType":"ELIMINAT","ParticipatingCars":"null","ParticipatingGarages":"null","Name":"Elimination race"}]}
+{"Races":[{"DurationInMinutes":180,"RaceType":"STANDARD","ParticipatingCars":[],"ParticipatingGarages":[],"Name":"Standard    race"}]}

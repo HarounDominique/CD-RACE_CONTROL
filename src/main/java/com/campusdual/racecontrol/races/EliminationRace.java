@@ -29,6 +29,11 @@ public class EliminationRace extends Race {
         super(name, raceType, durationInMinutes, participatingGarages, participatingCars);
     }
 
+    public EliminationRace(String name, int duration, ArrayList<Garage> participatingGarages, ArrayList<Car> participatingCars) {
+        super(name, participatingGarages, participatingCars);
+        super.setDurationInMinutes(duration);
+    }
+
     public EliminationRace(String name, ArrayList<Garage> participatingGarages, ArrayList<Car> participatingCars) {
         super(name, participatingGarages, participatingCars);
     }

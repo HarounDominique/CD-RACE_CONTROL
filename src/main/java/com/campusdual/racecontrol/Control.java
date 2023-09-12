@@ -123,6 +123,10 @@ public class Control {
         allGaragesArray = g.importGaragesFromJSON("allGarages.json");
         showGaragesArray = allGaragesArray;
 
+        Race ra = new StandardRace();
+
+        allRacesArray = ra.importRacesFromJSON("allRaces.json");
+
         boolean on = true;
         boolean control = false;
         boolean validRaceControlMenu = false;
@@ -144,6 +148,7 @@ public class Control {
 
                     c.exportJSONToFile(allCarsArray);
                     g.exportJSONToFile(allGaragesArray);
+                    ra.exportJSONToFile(allRacesArray);
                     on = false;
                     System.out.println("EXITING");
                     pause(1000);
