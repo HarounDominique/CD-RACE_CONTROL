@@ -72,6 +72,8 @@ public abstract class Race {
             JSONObject jsonObj = (JSONObject) obj;
             JSONArray jsonArray = (JSONArray) jsonObj.get("Races");
 
+            races.clear();
+
             for (Object carObj : jsonArray) {
                 JSONObject raceJson = (JSONObject) carObj;
                 long durationLong = (Long) raceJson.get("DurationInMinutes");
@@ -90,7 +92,7 @@ public abstract class Race {
                         races.add(r);
                     }
 
-                }else if(raceType.equals(RaceType.ELIMINAT)){
+                }else if(raceType.equals("ELIMINAT")){
                     if(participatingCars!=null&&participatingGarages!=null){
                         EliminationRace r = new EliminationRace(name, duration, participatingGarages, participatingCars);
                         races.add(r);
