@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class EliminationRace extends Race {
     //region ATTRIBUTES
     public final String NAME = "Elimination race";
-    public final int DURATION = 180;
+    public final int DURATION = 30; //en este caso, la duración hace referencia al tiempo de calentamiento; la duración dependerá del número de participantes
     public final RaceType RACE_TYPE = RaceType.ELIMINAT;
     //endregion
 
@@ -45,6 +45,36 @@ public class EliminationRace extends Race {
     //region METHODS
     @Override
     public void startRace() {
+        // Todo: actualizar el podium cuando finaliza la carrera
+        int counter = 0;
+        Car firstCar = null;
+        Car secondCar = null;
+        Car thirdCar = null;
+
+        for (Car c : this.getParticipatingCars()) {
+            counter++;
+            for (int minutes = 0; minutes < this.DURATION; minutes++) {
+                c.speedometerByCycle();
+            }
+            if (counter == 1) {
+                firstCar = c;
+            } else {
+                if (secondCar == null) {
+                    secondCar = c;
+                } else {
+                    if (c.getDistance() > firstCar.getDistance()) {
+                        thirdCar = secondCar;
+                        secondCar = firstCar;
+                        firstCar = c;
+                    } else if (c.getDistance() < firstCar.getDistance() && (secondCar == null || c.getDistance() > secondCar.getDistance())) {
+                        thirdCar = secondCar;
+                        secondCar = c;
+                    } else if (c.getDistance() < firstCar.getDistance() && (secondCar == null || c.getDistance() < secondCar.getDistance())) {
+                        thirdCar = c;
+                    }
+                }
+            }
+        }
     }
     //endregion
 }

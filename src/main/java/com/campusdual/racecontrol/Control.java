@@ -392,7 +392,13 @@ public class Control {
                                                 } catch (Exception e) {
                                                     e.printStackTrace();
                                                 }
-                                                System.out.println("Insert the race DURATION in minutes:");
+
+                                                if(raceType.equals(RaceType.STANDARD)){
+                                                    System.out.println("Insert the race DURATION in minutes:");
+                                                }else{
+                                                    System.out.println("Insert the race warm-up DURATION in minutes:");
+                                                }
+
                                                 try{
                                                     raceDuration = Input.integer();
                                                 }catch (Exception e){
