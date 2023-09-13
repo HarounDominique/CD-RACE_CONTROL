@@ -52,7 +52,7 @@ public class StandardRace extends Race {
 
         for (Car c : this.getParticipatingCars()) {
             counter++;
-            for (int minutes = 0; minutes < this.DURATION; minutes++) {
+            for (int minutes = 0; minutes <= this.DURATION; minutes++) {
                 c.speedometerByCycle();
             }
             if (counter == 1) {

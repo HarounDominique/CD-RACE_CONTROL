@@ -4,6 +4,7 @@ import com.campusdual.racecontrol.Car;
 import com.campusdual.racecontrol.Garage;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class EliminationRace extends Race {
     //region ATTRIBUTES
@@ -53,9 +54,10 @@ public class EliminationRace extends Race {
 
         for (Car c : this.getParticipatingCars()) {
             counter++;
-            for (int minutes = 0; minutes < this.DURATION; minutes++) {
+            for (int minutes = 0; minutes <= this.DURATION; minutes++) {
                 c.speedometerByCycle();
             }
+
             if (counter == 1) {
                 firstCar = c;
             } else {
@@ -73,6 +75,23 @@ public class EliminationRace extends Race {
                         thirdCar = c;
                     }
                 }
+            }
+        }
+        //una vez finalizado el calentamiento:
+        ArrayList<Car> warmedUpCars = new ArrayList<>(Arrays.asList(firstCar, secondCar, thirdCar));
+
+        for(int i = 0; i<getParticipatingCars().size();i++){
+            firstCar.speedometerByCycle();
+            secondCar.speedometerByCycle();
+            thirdCar.speedometerByCycle();
+
+            //establecer condiciones para que el que menos distancia tenga sea excluído
+        }
+
+        for(Car c : warmedUpCars){
+
+            if(c!=null){
+
             }
         }
     }
