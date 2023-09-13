@@ -65,10 +65,10 @@ public class StandardRace extends Race {
                         thirdCar = secondCar;
                         secondCar = firstCar;
                         firstCar = c;
-                    } else if (c.getDistance() < firstCar.getDistance() && (secondCar == null || c.getDistance() > secondCar.getDistance())) {
+                    } else if (secondCar == null || c.getDistance() > secondCar.getDistance()) {
                         thirdCar = secondCar;
                         secondCar = c;
-                    } else if (c.getDistance() < firstCar.getDistance() && (secondCar == null || c.getDistance() < secondCar.getDistance())) {
+                    } else if (thirdCar == null || c.getDistance() > thirdCar.getDistance()) {
                         thirdCar = c;
                     }
                 }

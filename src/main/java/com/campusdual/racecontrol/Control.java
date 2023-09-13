@@ -44,15 +44,15 @@ public class Control {
         }
     }
 
-    public ArrayList<Car> selectParticipatingCars(Garage firstParticipatingGarage, Garage secondParticipatingGarage){
+    public ArrayList<Car> selectParticipatingCars(Garage firstParticipatingGarage, Garage secondParticipatingGarage) {
         Car firstParticipatingCar = null;
         Car secondParticipatingCar = null;
         ArrayList<Car> participatingCars = null;
-        if(secondParticipatingGarage != null){
+        if (secondParticipatingGarage != null) {
             firstParticipatingCar = firstParticipatingGarage.getRandomCar();
             secondParticipatingCar = secondParticipatingGarage.getRandomCar();
             participatingCars = new ArrayList<>(Arrays.asList(firstParticipatingCar, secondParticipatingCar));
-        }else{
+        } else {
             participatingCars = firstParticipatingGarage.getCars();
         }
         this.participatingCarsArray = participatingCars;
@@ -216,7 +216,7 @@ public class Control {
                                                 int secondGarageIndex = 0;
                                                 int selectedGarageIndex;
                                                 int secondSelectedGarageIndex;
-                                                do{
+                                                do {
                                                     System.out.println("*********************| RACE CONTROL |*********************");
                                                     System.out.println("*********************|  RACE  MENU  |*********************");
                                                     System.out.println("*****************|FIRST GARAGE SELECTION|*****************");
@@ -232,11 +232,11 @@ public class Control {
                                                     while (garageIterator.hasNext()) {
                                                         garageIndex++;
                                                         Garage firstGarageIteration = garageIterator.next();
-                                                        System.out.println("     "+garageIndex + " | " + firstGarageIteration.getName());
+                                                        System.out.println("     " + garageIndex + " | " + firstGarageIteration.getName());
                                                     }
                                                     System.out.print("* >>> ");
                                                     String garageSelectionAnswer = Input.string();
-                                                    switch (garageSelectionAnswer.trim()){
+                                                    switch (garageSelectionAnswer.trim()) {
                                                         case "0":
                                                             garageIndex = 0;
                                                             validGarageSelection = true;
@@ -289,16 +289,23 @@ public class Control {
                                                                         default:
                                                                             try {
                                                                                 secondSelectedGarageIndex = Integer.parseInt(garageSecondSelectionAnswer.trim());
-                                                                                System.out.println("You selected " + showGaragesArray.get(secondSelectedGarageIndex -1).getName());
-                                                                                this.secondParticipatingGarage = showGaragesArray.get(secondSelectedGarageIndex -1);
+                                                                                System.out.println("You selected " + showGaragesArray.get(secondSelectedGarageIndex - 1).getName());
+                                                                                this.secondParticipatingGarage = showGaragesArray.get(secondSelectedGarageIndex - 1);
                                                                                 validSecondGarageSelection = true;
                                                                                 secondGarageIndex = 0;
                                                                                 //secondSelectedGarageIndex=0;
                                                                                 pause(500);
 
                                                                                 selectParticipatingCars(firstParticipatingGarage, secondParticipatingGarage);
-                                                                                StandardRace sr2 = new StandardRace(participatingGaragesArray, participatingCarsArray);
-                                                                                sr2.startRace();
+                                                                                if(allRacesArray.get(selectedRaceInteger - 1).getRaceType().equals(RaceType.STANDARD)){
+                                                                                    StandardRace r = new StandardRace(participatingGaragesArray, participatingCarsArray);
+                                                                                    r.startRace();
+                                                                                }else{
+                                                                                    EliminationRace r = new EliminationRace(participatingGaragesArray, participatingCarsArray);
+                                                                                    r.startRace();
+                                                                                }
+
+
 
                                                                             } catch (NumberFormatException nfe) {
                                                                                 System.out.println("ERROR: INVALID NUMBER FORMAT");
@@ -311,10 +318,10 @@ public class Control {
                                                                             }
                                                                             break;
 
-                                                                            /**HERE ENDS STANDARD RACE MENUS**/
+                                                                        /**HERE ENDS STANDARD RACE MENUS**/
 
                                                                     }
-                                                                }while(!validSecondGarageSelection);
+                                                                } while (!validSecondGarageSelection);
                                                             } catch (NumberFormatException nfe) {
                                                                 System.out.println("ERROR: INVALID NUMBER FORMAT");
                                                                 pause(1000);
@@ -325,7 +332,7 @@ public class Control {
                                                             }
                                                             break;
                                                     }
-                                                }while(!validGarageSelection);
+                                                } while (!validGarageSelection);
                                                 raceIndex = 0;
                                                 validRaceListAnswer = true;
 
@@ -376,7 +383,7 @@ public class Control {
                                                 System.out.println("Insert 1 for STANDARD race or 2 for ELIMINATION race:");
                                                 try {
                                                     String raceTypeAnswer = Input.string().trim();
-                                                    switch (raceTypeAnswer){
+                                                    switch (raceTypeAnswer) {
                                                         case "1":
                                                             raceType = RaceType.STANDARD;
                                                             invalidTypeRace = false;
@@ -393,28 +400,28 @@ public class Control {
                                                     e.printStackTrace();
                                                 }
 
-                                                if(raceType.equals(RaceType.STANDARD)){
+                                                if (raceType==RaceType.STANDARD) {
                                                     System.out.println("Insert the race DURATION in minutes:");
-                                                }else{
+                                                } else {
                                                     System.out.println("Insert the race warm-up DURATION in minutes:");
                                                 }
 
-                                                try{
+                                                try {
                                                     raceDuration = Input.integer();
-                                                }catch (Exception e){
+                                                } catch (Exception e) {
                                                     System.out.println("ERROR: Duration must be an integer. A default value (180) will be set.");
                                                     //e.printStackTrace();
                                                 }
-                                                if(raceType.equals(RaceType.STANDARD)){
+                                                if (raceType==RaceType.STANDARD) {
                                                     race = new StandardRace(raceName, raceDuration);
-                                                }else if(raceType.equals(RaceType.ELIMINAT)){
+                                                } else if (raceType==RaceType.ELIMINAT) {
                                                     race = new EliminationRace(raceName, raceDuration);
                                                 }
                                                 this.allRacesArray.add(race);
                                                 System.out.println("Race successfully added");
                                                 pause(1000);
                                                 ui();
-                                            }while(invalidTypeRace);
+                                            } while (invalidTypeRace);
                                             break;
 
                                         case "2":
